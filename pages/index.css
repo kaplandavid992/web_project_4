@@ -2,3 +2,12 @@
 
 @import url(../blocks/header/header.css);
 @import url(../blocks/header/__title-logo/header__title-logo.css);
+
+@import url(../blocks/profile/profile.css);
+@import url(../blocks/profile/__role/profile__role.css);
+@import url(../blocks/profile/__name/profile__name.css);
+@import url(../blocks/profile/__image/profile__image.css);
+@import url(../blocks/profile/__edit-btn/profile__edit-btn.css);
+@import url(../blocks/profile/__add-btn/profile__add-btn.css);
+@import url(../blocks/profile/__add-img/profile__add-img.css);
+@import url(../blocks/profile/__edit-img/profile__edit-img.css);
