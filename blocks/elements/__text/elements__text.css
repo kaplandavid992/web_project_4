@@ -9,5 +9,5 @@
   color: #000000;
   text-overflow: "...";
   white-space: nowrap;
-overflow: hidden;
+  overflow: hidden;
 }
