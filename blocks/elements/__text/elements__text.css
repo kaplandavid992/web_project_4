@@ -1,0 +1,13 @@
+.elements__text {
+  text-align: center;
+  font-size: 24px;
+  line-height: 1.21;
+  font-weight: 900;
+  left: 21px;
+  top: 25px;
+  position: absolute;
+  color: #000000;
+  text-overflow: "...";
+  white-space: nowrap;
+overflow: hidden;
+}
