@@ -1,3 +1,4 @@
+@import url(../vendor/fonts/font.css);
 @import url(../blocks/page/page.css);
 
 @import url(../blocks/header/header.css);
@@ -7,7 +8,10 @@
 @import url(../blocks/profile/__role/profile__role.css);
 @import url(../blocks/profile/__name/profile__name.css);
 @import url(../blocks/profile/__image/profile__image.css);
+@import url(../blocks/profile/__image-container/profile__image-container.css);
 @import url(../blocks/profile/__edit-btn/profile__edit-btn.css);
 @import url(../blocks/profile/__add-btn/profile__add-btn.css);
 @import url(../blocks/profile/__add-img/profile__add-img.css);
 @import url(../blocks/profile/__edit-img/profile__edit-img.css);
+@import url(../blocks/profile/__text-container/profile__text-container.css);
+@import url(../blocks/profile/__name-edit-container/profile__name-edit.css);

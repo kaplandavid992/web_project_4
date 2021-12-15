@@ -1,27 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="autor" content="David Kaplan" />
     <link rel="stylesheet" href="./pages/index.css" />
     <title>Around The U.S.</title>
-</head>
-<body class="page">
+  </head>
+  <body class="page">
     <header class="header">
-        <img class="header__title-logo" 
-                src="./images/aroundTheUs.png" 
-                alt="around the u.s text logo">
-        
+      <img
+        class="header__title-logo"
+        src="./images/aroundTheUs.png"
+        alt="around the u.s text logo"
+      />
     </header>
     <main>
-        <section class="profile">
-            <img class="profile__image" src="./images/profileONe.jpg" alt="face of person matching profile">
-            <p class="profile__name">Jacques Cousteau</p>
-            <p class="profile__role">Explorer</p>
-            <a href="#" class="profile__edit-btn"><img class="profile__edit-img" src="./images/editPencil.png" alt="pencil icon button"></a>
-            <a href="#" class="profile__add-btn"><img class="profile__add-img" src="./images/addPlusSign.png" alt="plus icon button"></a>
-        </section>
+      <section class="profile">
+        <div class="profile__image-container">
+          <img
+            class="profile__image"
+            src="./images/profileONe.jpg"
+            alt="face of person matching profile"
+          />
+        </div>
+        <div class="profile__text-container">
+          <div class="profile__name-edit-container">
+            <span class="profile__name">Jacques Cousteau</span>
+            <input type="image" class="profile__edit-img"
+            src="./images/editPencil.png"
+              ></input>
+
+          </div>
+
+          <p class="profile__role">Explorer</p>
+        </div>
+
+        <input type="image" src="./images/addPlusSign.png" class="profile__add-img"/>
+            
+      </section>
     </main>
-</body>
+  </body>
 </html>
