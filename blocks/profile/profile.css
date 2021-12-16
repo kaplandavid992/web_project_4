@@ -10,5 +10,6 @@
   .profile {
     margin: 0 19px 36px;
     flex-direction: column;
+    max-width: 282px;
   }
 }

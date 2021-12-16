@@ -1,5 +1,6 @@
 .profile__add-img {
     border: 2px solid #FFFFFF;
+    border-radius: 2px;
     padding: 14px 64px;
     z-index: 1;
     height: 22px;
