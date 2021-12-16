@@ -1,9 +1,14 @@
 .profile {
-    display: flex;
-    flex-direction: row;
-    position: relative;
-    
-    margin-left: 177.5px;
-    /* margin-right: 200px; */
-    margin-bottom: 50px;
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  margin-left: 177.5px;
+  margin-bottom: 50px;
+}
+
+@media screen and (max-width: 320px) {
+  .profile {
+    margin: 0 19px 36px;
+    flex-direction: column;
+  }
 }

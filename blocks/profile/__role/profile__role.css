@@ -3,3 +3,11 @@
     line-height: 1.21;
     font-weight: 400;
 }
+
+@media screen and (max-width:320px) {
+    .profile__role {
+        font-size: 14px;
+        line-height: 1.21;
+        margin: 14px auto 36px;
+    }
+}

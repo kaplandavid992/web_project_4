@@ -5,3 +5,9 @@
    margin-right: 165px;
     margin-bottom: 50px;
 }
+
+@media screen and (max-width:320px) {
+    .profile__text-container {
+        margin: 0 auto 36px;
+    }
+}

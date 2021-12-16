@@ -5,3 +5,11 @@
     height: 22px;
     margin-top:75px;
 }
+
+@media screen and (max-width:320px) {
+    .profile__add-img {
+        padding: 17px 133px;
+        height: 16px;
+        margin: 0 auto;
+    }
+}
