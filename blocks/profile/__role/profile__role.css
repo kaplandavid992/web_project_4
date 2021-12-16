@@ -4,7 +4,7 @@
     font-weight: 400;
 }
 
-@media screen and (max-width:320px) {
+@media screen and (max-width:450px) {
     .profile__role {
         font-size: 14px;
         line-height: 1.21;

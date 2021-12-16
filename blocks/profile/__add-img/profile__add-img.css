@@ -1,18 +1,28 @@
 .profile__add-img {
-    border: 2px solid #FFFFFF;
-    border-radius: 2px;
-    padding: 14px 64px;
-    z-index: 1;
-    height: 22px;
-    margin-top:75px;
+  border: 2px solid #ffffff;
+  border-radius: 2px;
+  padding: 14px 64px;
+  z-index: 1;
+  height: 22px;
+  margin-top: 75px;
 }
 
+@media screen and (max-width: 900px) {
+  .profile__add-img {
+    width: 22px;
+  }
+}
 
+@media screen and (max-width:700px) {
+  .profile__add-img {
+    margin-top: 0;
+  }
+}
 
-@media screen and (max-width:320px) {
-    .profile__add-img {
-        padding: 17px 133px;
-        height: 16px;
-        margin: 0 auto;
-    }
+@media screen and (max-width: 450px) {
+  .profile__add-img {
+    padding: 17px 133px;
+    height: 16px;
+    margin: 0 auto;
+  }
 }

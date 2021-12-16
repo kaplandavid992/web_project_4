@@ -13,14 +13,18 @@
   }
 }
 
-
-@media screen and (max-width: 320px) {
+@media screen and (max-width:581px){
   .footer {
+    max-width: 299px;
     font-size: 14px;
     line-height: 1.21;
     font-weight: 400;
-    margin-left: 19px;
-    margin-right: 19px;
-    margin-bottom: 36px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .footer {
+    margin: 0 19px 36px;
+    max-width: 292px;
   }
 }
