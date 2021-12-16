@@ -2,3 +2,10 @@
   max-width: 880px;
   margin: 0 200px 68px;
 }
+
+@media screen and (max-width:320px) {
+  .elements {
+   width: 282px;
+    margin: 0 19px 50px;
+  }
+}
