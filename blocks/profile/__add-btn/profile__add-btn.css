@@ -1,3 +1,7 @@
 .profile__add-btn {
-    
+}
+
+.profile__add-btn:hover {
+  opacity: 0.6;
+  cursor: pointer;
 }

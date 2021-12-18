@@ -1,0 +1,11 @@
+.form__exit-btn {
+  all: unset;
+  position: absolute;
+  top: -10%;
+  left: 100%;
+}
+
+.form__exit-btn:hover {
+  opacity: 0.6;
+  cursor: pointer;
+}

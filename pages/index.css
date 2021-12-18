@@ -1,6 +1,13 @@
 @import url(../vendor/fonts/font.css);
 @import url(../blocks/page/page.css);
 
+@import url(../blocks/form/form.css);
+@import url(../blocks/form/__exit-btn/form__exit-btn.css);
+@import url(../blocks/form/__header/form__header.css);
+@import url(../blocks/form/__name/form__name.css);
+@import url(../blocks/form/__role/form__role.css);
+@import url(../blocks/form/__save-btn/form__save-btn.css);
+
 @import url(../blocks/header/header.css);
 @import url(../blocks/header/__title-logo/header__title-logo.css);
 

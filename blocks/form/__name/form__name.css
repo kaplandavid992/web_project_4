@@ -1,0 +1,7 @@
+.form__name {
+    all: unset;
+    height: 27.34px;
+    margin-bottom: 29.74px;
+   
+    border-bottom: 2px solid red;
+}

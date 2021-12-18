@@ -7,6 +7,7 @@
   margin-top: 75px;
 }
 
+
 @media screen and (max-width: 900px) {
   .profile__add-img {
     width: 22px;

@@ -1,0 +1,17 @@
+.form__save-btn {
+  all: unset;
+  background-color: #000000;
+  color: #ffffff;
+  font-size: 18px;
+  line-height: 1.21;
+  font-weight: 400;
+  font-style: normal;
+  height: 50.15px;
+  border-radius: 2px;
+  text-align: center;
+}
+
+.form__save-btn:hover {
+  opacity: 0.8;
+  cursor: pointer;
+}
