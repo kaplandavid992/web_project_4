@@ -1,8 +1,4 @@
-.profile__edit-btn {
-    all: unset;
-}
-
 .profile__edit-btn:hover {
-    opacity: 0.6;
-    cursor: pointer;
-  }
+  opacity: 0.6;
+  cursor: pointer;
+}
