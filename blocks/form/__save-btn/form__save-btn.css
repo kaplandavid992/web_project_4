@@ -9,6 +9,7 @@
   height: 50.15px;
   border-radius: 2px;
   text-align: center;
+  width: 100%;
 }
 
 .form__save-btn:hover {

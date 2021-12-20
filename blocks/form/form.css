@@ -1,15 +1,15 @@
 .form {
-    display: none;
     flex-direction: column;
-    position: fixed;
+    position: absolute;
     background-color: #ffffff;
     width: 430px;
-    z-index: 1;
+    z-index: 2;
     top: 50%;
     left: 50%;
     transform: translate(-50%,-50%);
     border-radius: 10px;
     padding: 34px 36px 36.51px;
+    display: none;
 }
 
 @media screen and (max-width:450px) {

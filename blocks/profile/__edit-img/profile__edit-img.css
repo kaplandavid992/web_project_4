@@ -6,6 +6,12 @@
   
 }
 
+@media screen and (min-width: 700px) and (max-width:900px){
+  .profile__edit-img {
+    margin-top: 15px;
+  }
+}
+
 @media screen and (max-width: 450px) {
   .profile__edit-img {
     height: 7.5px;

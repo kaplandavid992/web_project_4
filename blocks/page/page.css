@@ -10,4 +10,5 @@
   -moz-text-size-adjust: 100%;
   font-family: Inter, Arial, Helvetica, sans-serif;
   text-rendering: optimizeLegibility;
+  position: relative;
 }

@@ -9,6 +9,8 @@
 @import url(../blocks/form/__role/form__role.css);
 @import url(../blocks/form/__save-btn/form__save-btn.css);
 
+@import url(../blocks/overlay/overlay.css);
+
 @import url(../blocks/button/button.css);
 
 @import url(../blocks/header/header.css);
