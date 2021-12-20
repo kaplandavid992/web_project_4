@@ -26,11 +26,13 @@ function editprofile() {
     let form = document.querySelector(".form");
     form.setAttribute("style", "display:flex");
     // need to sendthe place holders by current profile
+
 }
 
 profileAddBtn.addEventListener("click", addprofile);
 profileEditBtn.addEventListener("click", editprofile);
 formExitBtn.addEventListener("click", exitForm);
+formInputName.addEventListener("", )
 
 
 
@@ -60,8 +62,8 @@ formExitBtn.addEventListener("click", exitForm);
 
 //   profilesContainer.insertAdjacentHTML('beforeend', `
 // 		<div class="profile">
-//       <span class="profile__name">${artist.value}</span>
-//       <p class="profile__role">${profile.value}</p>
+//       <span class="profile__name">${name.value}</span>
+//       <p class="profile__role">${role.value}</p>
 // 		  <button class="profile__like"></button>
 // 		</div>
 //   `);

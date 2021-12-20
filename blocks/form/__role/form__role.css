@@ -15,3 +15,9 @@
     font-weight: 400;
     font-style: normal;
   }
+
+  @media screen and (max-width:450px) {
+      .form__role {
+          margin-bottom: 46x;
+      }
+  }

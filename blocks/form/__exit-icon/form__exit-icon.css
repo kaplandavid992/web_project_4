@@ -1,0 +1,9 @@
+.form__exit-icon {
+    width: 40px;
+}
+
+@media screen and (max-width:450px) {
+    .form__exit-icon {
+        width: 26px;
+    }
+}
