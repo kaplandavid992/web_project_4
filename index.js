@@ -3,11 +3,15 @@ let profileAddBtn = document.querySelector(".profile__add-btn");
 let formExitBtn = document.querySelector(".form__exit-btn");
 let form = document.querySelector(".form");
 
-
 function exitForm() {
+  let overlay = document.querySelector(".overlay");
   let form = document.querySelector(".form");
+  let formName = document.querySelector(".form__name");
+  let formRole = document.querySelector(".form__role");
   form.setAttribute("style", "display:none");
-  let pgBtns = document.querySelectorAll(".button");
+  overlay.setAttribute("style", "display:none");
+  formName.value = "";
+  formRole.value = "";
 }
 
 function saveForm(e) {
@@ -25,12 +29,9 @@ function editprofile() {
   let form = document.querySelector(".form");
   let overlay = document.querySelector(".overlay");
   form.setAttribute("style", "display:flex");
-  // overlay.setAttribute("style", "display: static");
+  overlay.setAttribute("style", "display: flex");
 }
-
 
 profileEditBtn.addEventListener("click", editprofile);
 formExitBtn.addEventListener("click", exitForm);
-form.addEventListener("submit", saveForm)
-
-
+form.addEventListener("submit", saveForm);

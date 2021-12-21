@@ -1,20 +1,20 @@
 .form {
-    flex-direction: column;
-    position: absolute;
-    background-color: #ffffff;
-    width: 430px;
-    z-index: 2;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%,-50%);
-    border-radius: 10px;
-    padding: 34px 36px 36.51px;
-    display: none;
+  flex-direction: column;
+  position: fixed;
+  background-color: #ffffff;
+  width: 430px;
+  z-index: 2;
+  top: 50vh;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 10px;
+  padding: 34px 36px 36.51px;
+  display: none;
 }
 
-@media screen and (max-width:450px) {
-    .form {
-        width: 238px;
-        padding: 25px 22px 25px;
-    }
+@media screen and (max-width: 450px) {
+  .form {
+    width: 238px;
+    padding: 25px 22px 25px;
+  }
 }
