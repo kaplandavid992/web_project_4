@@ -6,12 +6,8 @@ let form = document.querySelector(".form");
 function exitForm() {
   let overlay = document.querySelector(".overlay");
   let form = document.querySelector(".form");
-  let formName = document.querySelector(".form__name");
-  let formRole = document.querySelector(".form__role");
   form.setAttribute("style", "display:none");
   overlay.setAttribute("style", "display:none");
-  formName.value = "";
-  formRole.value = "";
 }
 
 function saveForm(e) {
