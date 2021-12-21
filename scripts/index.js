@@ -1,5 +1,5 @@
 let profileEditBtn = document.querySelector(".profile__edit-btn");
-let profileAddBtn = document.querySelector(".profile__add-btn");
+
 let formExitBtn = document.querySelector(".form__exit-btn");
 let form = document.querySelector(".form");
 

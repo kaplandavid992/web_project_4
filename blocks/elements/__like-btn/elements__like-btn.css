@@ -1,5 +1,7 @@
 .elements__like-btn {
-  position: absolute;
-  top: 30px;
-  right: 30px;
+  padding-right: 15px;
+}
+
+.elements__like-btn:hover {
+  opacity: 50%;
 }

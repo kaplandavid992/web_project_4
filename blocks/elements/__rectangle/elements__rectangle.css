@@ -3,5 +3,8 @@
   width: 282px;
   height: 79px;
   background-color: #ffffff;
-  position: relative;
+  /* position: relative; */
+  display: flex;
+  justify-content: space-between;
+  
 }
