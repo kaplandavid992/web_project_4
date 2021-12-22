@@ -8,6 +8,11 @@
   text-overflow: ellipsis;
 }
 
+@media screen and (max-width: 900px) {
+  .profile__role {
+    align-self: center;
+  }
+}
 @media screen and (max-width: 450px) {
   .profile__role {
     font-size: 14px;
