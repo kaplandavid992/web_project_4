@@ -1,3 +1,37 @@
+.profile__add-btn {
+  border: 2px solid #ffffff;
+  border-radius: 2px;
+  padding: 14px 64px;
+  z-index: 1;
+  height: 22px;
+  margin-top: 75px;
+  background-image: url(../../../images/addPlusSign.png);
+  background-repeat: no-repeat;
+  background-origin: content-box;
+  background-position-x: 50%;
+}
+
 .profile__add-btn:hover {
   opacity: 0.6;
+}
+
+@media screen and (max-width: 900px) {
+  .profile__add-btn {
+    width: 22px;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .profile__add-btn {
+    margin-top: 0;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .profile__add-btn {
+    padding: 17px 133px;
+    height: 16px;
+    width: 16px;
+    margin: 0 auto;
+  }
 }

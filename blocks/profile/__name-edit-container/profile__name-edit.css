@@ -1,3 +1,4 @@
 .profile__name-edit-container {
   flex-direction: row;
+  display: inline-flex;
 }

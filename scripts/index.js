@@ -1,33 +1,35 @@
 let profileEditBtn = document.querySelector(".profile__edit-btn");
+let popupFormExitBtn = document.querySelector(".popup__form-exit-btn");
+let popupForm = document.querySelector(".popup__form");
+let popup = document.querySelector(".popup");
+let nameInput = document.querySelector(".popup__form-input_name");
+let roleInput = document.querySelector(".popup__form-input_role");
+let profileName = document.querySelector(".profile__name");
+let profileRole = document.querySelector(".profile__role");
 
-let formExitBtn = document.querySelector(".form__exit-btn");
-let form = document.querySelector(".form");
+
+function togglePopupDisplay() {
+  popup.classList.toggle("popup_active");
+}
 
 function exitForm() {
-  let overlay = document.querySelector(".overlay");
-  let form = document.querySelector(".form");
-  form.setAttribute("style", "display:none");
-  overlay.setAttribute("style", "display:none");
+  togglePopupDisplay();
 }
 
 function saveForm(e) {
-  let name = document.querySelector(".form__name");
-  let role = document.querySelector(".form__role");
-  let profileName = document.querySelector(".profile__name");
-  let profileRole = document.querySelector(".profile__role");
-  profileName.textContent = name.value;
-  profileRole.textContent = role.value;
+  profileName.textContent = nameInput.value;
+  profileRole.textContent = roleInput.value;
   e.preventDefault();
   exitForm();
 }
 
-function editprofile() {
-  let form = document.querySelector(".form");
-  let overlay = document.querySelector(".overlay");
-  form.setAttribute("style", "display:flex");
-  overlay.setAttribute("style", "display: flex");
+function editProfile() {
+  nameInput.value = profileName.textContent;
+  roleInput.value = profileRole.textContent;
+  togglePopupDisplay();
 }
 
-profileEditBtn.addEventListener("click", editprofile);
-formExitBtn.addEventListener("click", exitForm);
-form.addEventListener("submit", saveForm);
+profileEditBtn.addEventListener("click", editProfile);
+popupFormExitBtn.addEventListener("click", exitForm);
+popupForm.addEventListener("submit", saveForm);
+

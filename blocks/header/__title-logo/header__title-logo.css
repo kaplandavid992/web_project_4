@@ -5,11 +5,9 @@
 
 @media screen and (max-width: 600px) {
   .header__title-logo {
-    
     margin-left: 3.5vw;
   }
 }
-
 
 @media screen and (max-width: 450px) {
   .header__title-logo {
