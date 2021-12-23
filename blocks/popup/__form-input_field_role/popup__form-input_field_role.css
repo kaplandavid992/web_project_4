@@ -1,0 +1,9 @@
+.popup__form-input_field_role {
+  margin-bottom: 48px;
+}
+
+@media screen and (max-width: 450px) {
+  .popup__form-input_field_role {
+    margin-bottom: 55px;
+  }
+}

@@ -6,6 +6,7 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  margin: 0;
 }
 
 @media screen and (max-width: 900px) {
@@ -17,5 +18,6 @@
   .profile__role {
     font-size: 14px;
     margin: 14px auto 36px;
+    max-width: 282px;
   }
 }

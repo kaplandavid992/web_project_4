@@ -1,6 +1,7 @@
 .header__title-logo {
   display: block;
   margin-bottom: 41px;
+  width: 173px;
 }
 
 @media screen and (max-width: 600px) {
@@ -11,8 +12,7 @@
 
 @media screen and (max-width: 450px) {
   .header__title-logo {
-    height: 24px;
     width: 126px;
-    margin: 28px 27px 167px 32px;
+    margin: 28px 167px 32px 27px;
   }
 }

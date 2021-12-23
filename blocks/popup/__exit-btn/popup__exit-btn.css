@@ -1,17 +1,17 @@
-.popup__form-exit-btn {
+.popup__exit-btn {
   all: unset;
   position: absolute;
   top: -10%;
   left: 100%;
 }
 
-.popup__form-exit-btn:hover {
+.popup__exit-btn:hover {
   opacity: 0.6;
   cursor: pointer;
 }
 
 @media screen and (max-width:450px) {
-  .popup__form-exit-btn {
+  .popup__exit-btn {
     left: 93%;
   }
 }

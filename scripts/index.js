@@ -1,15 +1,15 @@
 let profileEditBtn = document.querySelector(".profile__edit-btn");
-let popupFormExitBtn = document.querySelector(".popup__form-exit-btn");
+let popupExitBtn = document.querySelector(".popup__exit-btn");
 let popupForm = document.querySelector(".popup__form");
 let popup = document.querySelector(".popup");
-let nameInput = document.querySelector(".popup__form-input_name");
-let roleInput = document.querySelector(".popup__form-input_role");
+let nameInput = document.querySelector(".popup__form-input_field_name");
+let roleInput = document.querySelector(".popup__form-input_field_role");
 let profileName = document.querySelector(".profile__name");
 let profileRole = document.querySelector(".profile__role");
 
 
 function togglePopupDisplay() {
-  popup.classList.toggle("popup_active");
+  popup.classList.toggle("popup_display_flex");
 }
 
 function exitForm() {
@@ -30,6 +30,6 @@ function editProfile() {
 }
 
 profileEditBtn.addEventListener("click", editProfile);
-popupFormExitBtn.addEventListener("click", exitForm);
+popupExitBtn.addEventListener("click", exitForm);
 popupForm.addEventListener("submit", saveForm);
 

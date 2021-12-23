@@ -1,9 +1,9 @@
-.popup__form-exit-icon {
+.popup__exit-icon {
     width: 40px;
 }
 
 @media screen and (max-width:450px) {
-    .popup__form-exit-icon {
+    .popup__exit-icon {
         width: 26px;
     }
 }
