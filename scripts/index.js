@@ -9,7 +9,7 @@ let profileRole = document.querySelector(".profile__role");
 
 
 function togglePopupDisplay() {
-  popup.classList.toggle("popup_display_flex");
+  popup.classList.toggle("popup_active");
 }
 
 function exitForm() {

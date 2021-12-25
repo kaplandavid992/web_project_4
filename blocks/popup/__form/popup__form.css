@@ -1,12 +1,7 @@
 .popup__form {
   flex-direction: column;
-  position: fixed;
   background-color: #ffffff;
   width: 358px;
-  z-index: 2;
-  top: 50vh;
-  left: 50%;
-  transform: translate(-50%, -50%);
   border-radius: 10px;
   padding: 34px 36px 36.51px;
 }
