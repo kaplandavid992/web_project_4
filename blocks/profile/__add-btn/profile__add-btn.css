@@ -8,7 +8,7 @@
   background-image: url(../../../images/addPlusSign.png);
   background-repeat: no-repeat;
   background-origin: content-box;
-  background-position-x: 50%;
+  background-position: 50%, 50%;
 }
 
 .profile__add-btn:hover {
