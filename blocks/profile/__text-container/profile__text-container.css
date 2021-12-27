@@ -2,12 +2,12 @@
   display: flex;
   flex-direction: column;
   margin-top: 62px;
-  margin-right: min(15vw,154px); /* 165 by figma*/
+  margin-right: min(15vw,165px); 
 }
 
 @media screen and (max-width: 900px) {
     .profile__text-container {
-      margin: 62px auto 0;
+      margin: 28px auto 0;
       justify-content: center;
     }
   }
