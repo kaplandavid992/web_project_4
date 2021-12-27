@@ -1,8 +1,9 @@
 .popup__exit-btn {
   all: unset;
-  position: relative;
-  top: -10%;
-  left: 100%;
+  position: absolute;
+  top: -43px;
+right: -43px;
+z-index: 2;
 }
 
 .popup__exit-btn:hover {
@@ -12,7 +13,7 @@
 
 @media screen and (max-width:450px) {
   .popup__exit-btn {
-    margin-left: -26.38px;
-    margin-bottom: 13.62px;
+    top: -40px;
+    right: 0;
   }
 }
