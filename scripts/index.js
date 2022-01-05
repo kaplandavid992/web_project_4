@@ -1,7 +1,6 @@
 let profileEditBtn = document.querySelector(".profile__edit-btn");
 let profileAddBtn = document.querySelector(".profile__add-btn");
 let popupExitBtn = document.querySelector(".popup__exit-btn");
-
 let popup = document.querySelector(".popup");
  
 
@@ -85,8 +84,11 @@ function insertCard(card) {
   cardsList.appendChild(card);
 }
 
+function prependCard(card) {
+  cardsList.prepend(card);
+}
+
 function createForm(form) {
- 
   globalThis.clonedForm = formTemplate.content
     .querySelector(".popup__form")
     .cloneNode(true);
@@ -110,7 +112,6 @@ function insertForm(form) {
 
 function togglePopupDisplay() {
   popup.classList.toggle("popup_active");
-  
 }
 
 function exitForm() {
@@ -120,14 +121,12 @@ function exitForm() {
 function editProfile() {
   document.querySelector(".popup__form") === null ? null : popUpWindow.lastChild.remove();
   insertForm(createForm(formValues[0]));
-  
   togglePopupDisplay();
 }
 
 function addImage() {
-  const form = document.querySelector(".popup__form") === null ? null : popUpWindow.lastChild.remove();
+  document.querySelector(".popup__form") === null ? null : popUpWindow.lastChild.remove();
   insertForm(createForm(formValues[1]));
-  window.popupForm.addEventListener("submit", submitForm);
   togglePopupDisplay();
 }
 
@@ -136,19 +135,7 @@ initialCards.forEach((card) => {
 });
 
 
-
-// function PopupWindowContentSelector(content){
-//     popUpWindow.innerHTML='';
-//     popUpWindow.appendChild(content);
-// }
-
-
-
-
-
-
 function submitForm(e) {
-
   function saveForm() {
     const inputA = clonedForm.querySelector("#inputA");
     const inputB = clonedForm.querySelector("#inputB");
@@ -156,12 +143,14 @@ function submitForm(e) {
     profileRole.textContent = inputB.value;
   }
 
-  // function addImageCreate() {
-  //   const inputA = document.querySelector("#inputA");
-  //   const inputB = document.querySelector("#inputB");
-  // }
+  function addImageCreate() {
+    const inputA = clonedForm.querySelector("#inputA");
+    const inputB = clonedForm.querySelector("#inputB");
+    let newCard = { name: inputA.value , link:inputB.value, } 
+    prependCard(createCard(newCard));
+  }
   
-  clonedForm.id === "editProfile" ? saveForm() : null;
+  clonedForm.id === "editProfile" ? saveForm() : addImageCreate();
   e.preventDefault();
   exitForm();
 }
@@ -169,7 +158,7 @@ function submitForm(e) {
 profileEditBtn.addEventListener("click", editProfile);
 profileAddBtn.addEventListener("click", addImage);
 popupExitBtn.addEventListener("click", exitForm);
-// popupForm.addEventListener("submit", saveForm);
+
 
 
 
