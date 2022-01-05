@@ -1,4 +1,4 @@
-.popup__form-save-btn {
+.popup__form-submit-btn {
   all: unset;
   background-color: #000000;
   color: #ffffff;
@@ -12,13 +12,13 @@
   width: 100%;
 }
 
-.popup__form-save-btn:hover {
+.popup__form-submit-btn:hover {
   opacity: 0.8;
   cursor: pointer;
 }
 
 @media screen and (max-width: 450px) {
-  .popup__form-save-btn {
+  .popup__form-submit-btn {
     font-size: 14px;
   }
 }

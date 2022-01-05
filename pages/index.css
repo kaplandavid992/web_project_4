@@ -10,7 +10,7 @@
 @import url(../blocks/popup/__form/popup__form.css);
 @import url(../blocks/popup/__form-header/popup__form-header.css);
 @import url(../blocks/popup/__form-input/popup__form-input.css);
-@import url(../blocks/popup/__form-save-btn/popup__form-save-btn.css);
+@import url(../blocks/popup/__form-submit-btn/popup__form-submit-btn.css);
 
 @import url(../blocks/button/button.css);
 
