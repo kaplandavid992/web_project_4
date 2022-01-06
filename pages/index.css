@@ -33,6 +33,8 @@
 @import url(../blocks/elements/__image/elements__image.css);
 @import url(../blocks/elements/__text/elements__text.css);
 @import url(../blocks/elements/__like-btn/elements__like-btn.css);
+@import url(../blocks/elements/__svg-heart_liked/elements__svg-heart_liked.css);
+@import url(../blocks/elements/__svg-heart/elements__svg-heart.css);
 @import url(../blocks/elements/__list/elements__list.css);
 
 @import url(../blocks/footer/footer.css);

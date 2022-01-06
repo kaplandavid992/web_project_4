@@ -2,16 +2,8 @@ let profileEditBtn = document.querySelector(".profile__edit-btn");
 let profileAddBtn = document.querySelector(".profile__add-btn");
 let popupExitBtn = document.querySelector(".popup__exit-btn");
 let popup = document.querySelector(".popup");
- 
-
-let addTitleInput = document.querySelector(".popup__form-input_add-title");
-let addImageLink = document.querySelector(".popup__form-input_add-image-link");
 let popUpWindow = document.querySelector(".popup__window");
 let formTemplate = document.querySelector("#form-template");
-
-let addTitle = document.querySelector(".add__title");
-
-
 let profileName = document.querySelector(".profile__name");
 let profileRole = document.querySelector(".profile__role");
 let cardTemplate = document.querySelector("#card-template");
@@ -72,12 +64,19 @@ const formValues = [
 ];
 
 function createCard(card) {
-  let clonedCard = cardTemplate.content
+  const clonedCard = cardTemplate.content
     .querySelector(".elements__element")
     .cloneNode(true);
   clonedCard.querySelector(".elements__image").src = card.link;
   clonedCard.querySelector(".elements__text").textContent = card.name;
+  const svgHeartBtn = clonedCard.querySelector(".elements__like-btn");
+  svgHeartBtn.addEventListener("click", toggleLikeBtn);
+  console.log(svgHeartBtn);
   return clonedCard;
+}
+
+function toggleLikeBtn(e) {
+  e.target.classList.toggle("elements__svg-heart_liked");
 }
 
 function insertCard(card) {
@@ -158,6 +157,7 @@ function submitForm(e) {
 profileEditBtn.addEventListener("click", editProfile);
 profileAddBtn.addEventListener("click", addImage);
 popupExitBtn.addEventListener("click", exitForm);
+
 
 
 
