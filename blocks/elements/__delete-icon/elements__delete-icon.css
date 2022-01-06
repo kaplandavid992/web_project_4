@@ -1,0 +1,8 @@
+.elements__delete-icon {
+    position: absolute;
+    width: 18px;
+    height: 19.3px;
+    background-image: url(../../../images/Trash.svg);
+    top: 18px;
+    left: 249px;
+}

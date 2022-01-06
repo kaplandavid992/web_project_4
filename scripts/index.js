@@ -70,8 +70,14 @@ function createCard(card) {
   clonedCard.querySelector(".elements__image").src = card.link;
   clonedCard.querySelector(".elements__text").textContent = card.name;
   const svgHeartBtn = clonedCard.querySelector(".elements__like-btn");
+  const deleteIcon = clonedCard.querySelector(".elements__delete-icon");
   svgHeartBtn.addEventListener("click", toggleLikeBtn);
+  deleteIcon.addEventListener("click", deleteCard)
   return clonedCard;
+}
+
+function deleteCard(e) {
+  e.target.parentNode.remove();
 }
 
 function toggleLikeBtn(e) {
