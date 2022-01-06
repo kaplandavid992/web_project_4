@@ -71,7 +71,6 @@ function createCard(card) {
   clonedCard.querySelector(".elements__text").textContent = card.name;
   const svgHeartBtn = clonedCard.querySelector(".elements__like-btn");
   svgHeartBtn.addEventListener("click", toggleLikeBtn);
-  console.log(svgHeartBtn);
   return clonedCard;
 }
 
