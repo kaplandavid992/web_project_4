@@ -1,15 +1,15 @@
-let profileEditBtn = document.querySelector(".profile__edit-btn");
-let profileAddBtn = document.querySelector(".profile__add-btn");
-let popupExitBtn = document.querySelector(".popup__exit-btn");
-let popup = document.querySelector(".popup");
-let popUpWindow = document.querySelector(".popup__window");
+const profileEditBtn = document.querySelector(".profile__edit-btn");
+const profileAddBtn = document.querySelector(".profile__add-btn");
+const popupExitBtn = document.querySelector(".popup__exit-btn");
+const popup = document.querySelector(".popup");
+const popUpWindow = document.querySelector(".popup__window");
 const formTemplate = document.querySelector("#form-template");
 const cardTemplate = document.querySelector("#card-template");
 const imagePopUpTemplate = document.querySelector("#imagePopUp-template");
+const cardsList = document.querySelector(".elements__list");
 let profileName = document.querySelector(".profile__name");
 let profileRole = document.querySelector(".profile__role");
 
-let cardsList = document.querySelector(".elements__list");
 
 const initialCards = [
   {
@@ -85,9 +85,9 @@ function imagePopUpCreate(e) {
   clonedImagePopUp.querySelector(".popup__imagePopUp").src = e.target.src;
   clonedImagePopUp.querySelector(".popup__imagePopUp-text").textContent =
     e.target.nextElementSibling.nextElementSibling.textContent;
+  clearPopUpWindow();
   popUpWindow.appendChild(clonedImagePopUp);
   popUpWindow.classList.add("popup__window_imagePopUp");
-  console.log(popUpWindow);
   popup.classList.toggle("popup_active");
 }
 
@@ -132,24 +132,25 @@ function insertForm(form) {
 
 function togglePopupDisplay() {
   popup.classList.toggle("popup_active");
-  if(popup.querySelector(".popup__imagePopUp-text").textContent) {
+  if (popup.querySelector(".popup__imagePopUp-text").textContent) {
     popup.querySelector(".popup__imagePopUp").remove();
     popup.querySelector(".popup__imagePopUp-text").remove();
+    popUpWindow.classList.remove("popup__window_imagePopUp");
   }
 }
 
+function clearPopUpWindow() {
+  popUpWindow.lastChild === null ? null : popUpWindow.lastChild.remove();
+}
+
 function editProfile() {
-  document.querySelector(".popup__form") === null
-    ? null
-    : popUpWindow.lastChild.remove();
+  clearPopUpWindow();
   insertForm(createForm(formValues[0]));
   togglePopupDisplay();
 }
 
 function addImage() {
-  document.querySelector(".popup__form") === null
-    ? null
-    : popUpWindow.lastChild.remove();
+  clearPopUpWindow();
   insertForm(createForm(formValues[1]));
   togglePopupDisplay();
 }
