@@ -86,6 +86,8 @@ function imagePopUpCreate(e) {
   clonedImagePopUp.querySelector(".popup__imagePopUp-text").textContent =
     e.target.nextElementSibling.nextElementSibling.textContent;
   popUpWindow.appendChild(clonedImagePopUp);
+  popUpWindow.classList.add("popup__window_imagePopUp");
+  console.log(popUpWindow);
   popup.classList.toggle("popup_active");
 }
 
