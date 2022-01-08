@@ -3,10 +3,12 @@ let profileAddBtn = document.querySelector(".profile__add-btn");
 let popupExitBtn = document.querySelector(".popup__exit-btn");
 let popup = document.querySelector(".popup");
 let popUpWindow = document.querySelector(".popup__window");
-let formTemplate = document.querySelector("#form-template");
+const formTemplate = document.querySelector("#form-template");
+const cardTemplate = document.querySelector("#card-template");
+const imagePopUpTemplate = document.querySelector("#imagePopUp-template");
 let profileName = document.querySelector(".profile__name");
 let profileRole = document.querySelector(".profile__role");
-let cardTemplate = document.querySelector("#card-template");
+
 let cardsList = document.querySelector(".elements__list");
 
 const initialCards = [
@@ -72,8 +74,19 @@ function createCard(card) {
   const svgHeartBtn = clonedCard.querySelector(".elements__like-btn");
   const deleteIcon = clonedCard.querySelector(".elements__delete-icon");
   svgHeartBtn.addEventListener("click", toggleLikeBtn);
-  deleteIcon.addEventListener("click", deleteCard)
+  deleteIcon.addEventListener("click", deleteCard);
+  const cardImage = clonedCard.querySelector(".elements__image");
+  cardImage.addEventListener("click", imagePopUpCreate);
   return clonedCard;
+}
+
+function imagePopUpCreate(e) {
+  let clonedImagePopUp = imagePopUpTemplate.content.cloneNode(true);
+  clonedImagePopUp.querySelector(".popup__imagePopUp").src = e.target.src;
+  clonedImagePopUp.querySelector(".popup__imagePopUp-text").textContent =
+    e.target.nextElementSibling.nextElementSibling.textContent;
+  popUpWindow.appendChild(clonedImagePopUp);
+  popup.classList.toggle("popup_active");
 }
 
 function deleteCard(e) {
@@ -96,7 +109,7 @@ function createForm(form) {
   globalThis.clonedForm = formTemplate.content
     .querySelector(".popup__form")
     .cloneNode(true);
-  clonedForm.classList.add(`popup__form_${form.classModifier}`); 
+  clonedForm.classList.add(`popup__form_${form.classModifier}`);
   clonedForm.querySelector(".popup__form-header").textContent = form.header;
   clonedForm.querySelector("#inputA").placeholder = form.inputPlaceholderA;
   clonedForm.querySelector("#inputA").name = form.inputNameA;
@@ -105,7 +118,8 @@ function createForm(form) {
   clonedForm.querySelector("#inputB").name = form.inputNameB;
   clonedForm.querySelector("#inputB").value = form.inputBvalue;
   clonedForm.id = form.id;
-  clonedForm.querySelector(".popup__form-submit-btn").textContent = form.submitBtnTxt;
+  clonedForm.querySelector(".popup__form-submit-btn").textContent =
+    form.submitBtnTxt;
   clonedForm.addEventListener("submit", submitForm);
   return clonedForm;
 }
@@ -116,20 +130,24 @@ function insertForm(form) {
 
 function togglePopupDisplay() {
   popup.classList.toggle("popup_active");
-}
-
-function exitForm() {
-  togglePopupDisplay();
+  if(popup.querySelector(".popup__imagePopUp-text").textContent) {
+    popup.querySelector(".popup__imagePopUp").remove();
+    popup.querySelector(".popup__imagePopUp-text").remove();
+  }
 }
 
 function editProfile() {
-  document.querySelector(".popup__form") === null ? null : popUpWindow.lastChild.remove();
+  document.querySelector(".popup__form") === null
+    ? null
+    : popUpWindow.lastChild.remove();
   insertForm(createForm(formValues[0]));
   togglePopupDisplay();
 }
 
 function addImage() {
-  document.querySelector(".popup__form") === null ? null : popUpWindow.lastChild.remove();
+  document.querySelector(".popup__form") === null
+    ? null
+    : popUpWindow.lastChild.remove();
   insertForm(createForm(formValues[1]));
   togglePopupDisplay();
 }
@@ -137,7 +155,6 @@ function addImage() {
 initialCards.forEach((card) => {
   insertCard(createCard(card));
 });
-
 
 function submitForm(e) {
   function saveForm() {
@@ -150,20 +167,15 @@ function submitForm(e) {
   function addImageCreate() {
     const inputA = clonedForm.querySelector("#inputA");
     const inputB = clonedForm.querySelector("#inputB");
-    let newCard = { name: inputA.value , link:inputB.value, } 
+    let newCard = { name: inputA.value, link: inputB.value };
     prependCard(createCard(newCard));
   }
-  
+
   clonedForm.id === "editProfile" ? saveForm() : addImageCreate();
   e.preventDefault();
-  exitForm();
+  togglePopupDisplay();
 }
 
 profileEditBtn.addEventListener("click", editProfile);
 profileAddBtn.addEventListener("click", addImage);
-popupExitBtn.addEventListener("click", exitForm);
-
-
-
-
-
+popupExitBtn.addEventListener("click", togglePopupDisplay);
