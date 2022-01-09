@@ -135,7 +135,7 @@ function togglePopupDisplay() {
 }
 
 function clearPopUpWindow() {
-  popup.innerHTML === null ? null : popup.innerHTML="";
+  popup.innerHTML === null ? null : (popup.innerHTML = "");
 }
 
 function editProfile() {
@@ -176,4 +176,3 @@ function submitForm(e) {
 
 profileEditBtn.addEventListener("click", editProfile);
 profileAddBtn.addEventListener("click", addImage);
-
