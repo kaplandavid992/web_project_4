@@ -107,11 +107,13 @@ function prependCard(card) {
 }
 
 function createForm(form) {
-  globalThis.clonedForm = formTemplate.content.cloneNode(true);
+  
+  const clonedForm = formTemplate.content.cloneNode(true);
   const popupExitBtn = clonedForm.querySelector(".popup__exit-btn");
   popupExitBtn.addEventListener("click", togglePopupDisplay);
-  const FormItem = clonedForm.querySelector(".popup__form");
-  FormItem.classList.add(`popup__form_${form.classModifier}`);
+  globalThis.formItem = clonedForm.querySelector(".popup__form");
+  console.log(formItem);
+  formItem.classList.add(`popup__form_${form.classModifier}`);
   clonedForm.querySelector(".popup__form-header").textContent = form.header;
   clonedForm.querySelector("#inputA").placeholder = form.inputPlaceholderA;
   clonedForm.querySelector("#inputA").name = form.inputNameA;
@@ -119,10 +121,10 @@ function createForm(form) {
   clonedForm.querySelector("#inputB").placeholder = form.inputPlaceholderB;
   clonedForm.querySelector("#inputB").name = form.inputNameB;
   clonedForm.querySelector("#inputB").value = form.inputBvalue;
-  clonedForm.id = form.id;
+  formItem.id = form.id;
   clonedForm.querySelector(".popup__form-submit-btn").textContent =
     form.submitBtnTxt;
-  clonedForm.addEventListener("submit", submitForm);
+    formItem.addEventListener("submit", submitForm);
   return clonedForm;
 }
 
@@ -156,20 +158,20 @@ initialCards.forEach((card) => {
 
 function submitForm(e) {
   function saveForm() {
-    const inputA = clonedForm.querySelector("#inputA");
-    const inputB = clonedForm.querySelector("#inputB");
+    const inputA = formItem.querySelector("#inputA");
+    const inputB = formItem.querySelector("#inputB");
     profileName.textContent = inputA.value;
     profileRole.textContent = inputB.value;
   }
 
   function addImageCreate() {
-    const inputA = clonedForm.querySelector("#inputA");
-    const inputB = clonedForm.querySelector("#inputB");
+    const inputA = formItem.querySelector("#inputA");
+    const inputB = formItem.querySelector("#inputB");
     let newCard = { name: inputA.value, link: inputB.value };
     prependCard(createCard(newCard));
   }
 
-  clonedForm.id === "editProfile" ? saveForm() : addImageCreate();
+  formItem.id === "editProfile" ? saveForm() : addImageCreate();
   e.preventDefault();
   togglePopupDisplay();
 }
