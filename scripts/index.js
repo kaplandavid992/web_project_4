@@ -10,7 +10,6 @@ const cardsList = document.querySelector(".elements__list");
 let profileName = document.querySelector(".profile__name");
 let profileRole = document.querySelector(".profile__role");
 
-
 const initialCards = [
   {
     name: "Yosemite Valley",
