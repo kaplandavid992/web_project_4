@@ -1,6 +1,5 @@
 const profileEditBtn = document.querySelector(".profile__edit-btn");
 const profileAddBtn = document.querySelector(".profile__add-btn");
-const popupExitBtn = document.querySelector(".popup__exit-btn");
 const popup = document.querySelector(".popup");
 const popUpWindow = document.querySelector(".popup__window");
 const formTemplate = document.querySelector("#form-template");
@@ -80,14 +79,15 @@ function createCard(card) {
 }
 
 function imagePopUpCreate(e) {
-  let clonedImagePopUp = imagePopUpTemplate.content.cloneNode(true);
+  const clonedImagePopUp = imagePopUpTemplate.content.cloneNode(true);
+  const popupExitBtn = clonedImagePopUp.querySelector(".popup__exit-btn");
+  popupExitBtn.addEventListener("click", togglePopupDisplay);
   clonedImagePopUp.querySelector(".popup__imagePopUp").src = e.target.src;
   clonedImagePopUp.querySelector(".popup__imagePopUp-text").textContent =
     e.target.nextElementSibling.nextElementSibling.textContent;
   clearPopUpWindow();
-  popUpWindow.appendChild(clonedImagePopUp);
-  popUpWindow.classList.add("popup__window_imagePopUp");
-  popup.classList.toggle("popup_active");
+  popup.appendChild(clonedImagePopUp);
+  togglePopupDisplay();
 }
 
 function deleteCard(e) {
@@ -107,10 +107,11 @@ function prependCard(card) {
 }
 
 function createForm(form) {
-  globalThis.clonedForm = formTemplate.content
-    .querySelector(".popup__form")
-    .cloneNode(true);
-  clonedForm.classList.add(`popup__form_${form.classModifier}`);
+  globalThis.clonedForm = formTemplate.content.cloneNode(true);
+  const popupExitBtn = clonedForm.querySelector(".popup__exit-btn");
+  popupExitBtn.addEventListener("click", togglePopupDisplay);
+  const FormItem = clonedForm.querySelector(".popup__form");
+  FormItem.classList.add(`popup__form_${form.classModifier}`);
   clonedForm.querySelector(".popup__form-header").textContent = form.header;
   clonedForm.querySelector("#inputA").placeholder = form.inputPlaceholderA;
   clonedForm.querySelector("#inputA").name = form.inputNameA;
@@ -126,20 +127,15 @@ function createForm(form) {
 }
 
 function insertForm(form) {
-  popUpWindow.appendChild(form);
+  popup.appendChild(form);
 }
 
 function togglePopupDisplay() {
   popup.classList.toggle("popup_active");
-  if (popup.querySelector(".popup__imagePopUp-text").textContent) {
-    popup.querySelector(".popup__imagePopUp").remove();
-    popup.querySelector(".popup__imagePopUp-text").remove();
-    popUpWindow.classList.remove("popup__window_imagePopUp");
-  }
 }
 
 function clearPopUpWindow() {
-  popUpWindow.lastChild === null ? null : popUpWindow.lastChild.remove();
+  popup.innerHTML === null ? null : popup.innerHTML="";
 }
 
 function editProfile() {
@@ -180,4 +176,4 @@ function submitForm(e) {
 
 profileEditBtn.addEventListener("click", editProfile);
 profileAddBtn.addEventListener("click", addImage);
-popupExitBtn.addEventListener("click", togglePopupDisplay);
+

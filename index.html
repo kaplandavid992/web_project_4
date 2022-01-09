@@ -8,18 +8,19 @@
     <title>Around The U.S.</title>
   </head>
   <body class="page">
-    <section class="popup">
-      <div class="popup__window">
+    <div class="popup">
+      
+      <!-- <div class="popup__window" onload="">
         <button class="popup__exit-btn" type="reset" aria-label="">
           <img
             class="popup__exit-icon"
             src="images/exit_icon.png"
             alt="exit icon button"
           />
-        </button>
-        
-      </div>
-    </section>
+        </button> -->
+<!--         
+      </div> -->
+    </div>
     <header class="header">
       <img 
         src="./images/logoAroundUS.svg" 
@@ -78,6 +79,14 @@
     </template>
 
     <template id="form-template">
+      <div class="popup__window">
+        <button class="popup__exit-btn" type="reset" aria-label="">
+          <img
+            class="popup__exit-icon"
+            src="images/exit_icon.png"
+            alt="exit icon button"
+          />
+        </button>
         <form class="popup__form" name="popup__form">
           <h2 class="popup__form-header"></h2>
           <input
@@ -96,11 +105,21 @@
           />
           <button class="popup__form-submit-btn" type="submit" aria-label=""></button>
       </form>
+      </div>
     </template>
 
     <template id="imagePopUp-template">
+      <div class="popup__window popup__window_imagePopUp">
+        <button class="popup__exit-btn" type="reset" aria-label="">
+          <img
+            class="popup__exit-icon"
+            src="images/exit_icon.png"
+            alt="exit icon button"
+          />
+        </button>
       <img src="" class="popup__imagePopUp">
       <p class="popup__imagePopUp-text"></p>
+      </div>
     </template>
 
     <script src="./scripts/index.js"></script>

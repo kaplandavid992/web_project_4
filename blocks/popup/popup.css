@@ -2,10 +2,6 @@
   0% {
     opacity: 1;
     visibility: visible;
-    display: flex;
-    justify-content: center;
-    justify-content: center;
-    align-items: center;
   }
   25% {
     opacity: 0.75;
@@ -28,6 +24,7 @@
 .popup {
   visibility: hidden;
   position: fixed;
+  display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
