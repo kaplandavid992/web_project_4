@@ -1,15 +1,10 @@
 const profileEditBtn = document.querySelector(".profile__edit-btn");
 const profileAddBtn = document.querySelector(".profile__add-btn");
 const popupExitBtn = document.querySelectorAll(".popup__exit-btn");
-const forms = document.querySelectorAll(".popup__form");
-const popup = document.querySelector(".popup");
-const popUpWindow = document.querySelector(".popup__window");
-
 const cardTemplate = document.querySelector("#card-template");
-
 const cardsList = document.querySelector(".elements__list");
-let profileName = document.querySelector(".profile__name");
-let profileRole = document.querySelector(".profile__role");
+const profileName = document.querySelector(".profile__name");
+const profileRole = document.querySelector(".profile__role");
 
 const initialCards = [
   {
@@ -42,13 +37,14 @@ function createCard(card) {
   const clonedCard = cardTemplate.content
     .querySelector(".elements__element")
     .cloneNode(true);
-  clonedCard.querySelector(".elements__image").src = card.link;
+  const cardImage = clonedCard.querySelector(".elements__image");
+  cardImage.src = card.link;
+  cardImage.alt = "nice view of " + card.name;
   clonedCard.querySelector(".elements__text").textContent = card.name;
   const svgHeartBtn = clonedCard.querySelector(".elements__like-btn");
   const deleteIcon = clonedCard.querySelector(".elements__delete-icon");
   svgHeartBtn.addEventListener("click", toggleLikeBtn);
   deleteIcon.addEventListener("click", deleteCard);
-  const cardImage = clonedCard.querySelector(".elements__image");
   cardImage.addEventListener("click", imagePopUp);
   return clonedCard;
 }
@@ -69,11 +65,8 @@ function prependCard(card) {
   cardsList.prepend(card);
 }
 
-function insertForm(form) {
-  popup.appendChild(form);
-}
-
 function togglePopup(popUpElement) {
+  popUpElement.style.display = "flex";
   popUpElement.classList.toggle("popup_active");
 }
 
@@ -88,9 +81,11 @@ function addImageFormDisplay() {
 }
 
 function imagePopUp(e) {
-  document.querySelector(".popup__imagePopUp").src = e.target.src;
-  document.querySelector(".popup__imagePopUp-text").textContent =
-    e.target.nextElementSibling.nextElementSibling.textContent;
+  const imageFile =  document.querySelector(".popup__imagePopUp");
+  const imageText = document.querySelector(".popup__imagePopUp-text");
+  imageFile.src = e.target.src;
+  imageText.textContent = e.target.nextElementSibling.nextElementSibling.textContent;
+  imageFile.alt = "view of " + imageText.textContent;
   const popUpElement = document.querySelector("#imagePopUp");
   togglePopup(popUpElement);
 }
@@ -117,8 +112,8 @@ function submitNewPlaceForm(e) {
   let inputB = createPlaceForm.querySelector("#inputB");
   let newCard = { name: inputA.value, link: inputB.value };
   prependCard(createCard(newCard));
-  inputA.value="";
-  inputB.value="";
+  inputA.value = "";
+  inputB.value = "";
   e.preventDefault();
   togglePopup(popUpElement);
 }
