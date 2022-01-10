@@ -71,7 +71,7 @@ function togglePopup(popUpElement) {
 }
 
 function editProfileFormDisplay() {
-  const popUpElement = document.querySelector("#editProfileForm");
+  const popUpElement = document.querySelector("#editProfile");
   togglePopup(popUpElement);
 }
 
@@ -98,10 +98,10 @@ initialCards.forEach((card) => {
 function submitProfileForm(e) {
   const editForm = e.target;
   const popUpElement = e.target.parentNode.parentNode;
-  const inputA = editForm.querySelector("#inputA");
-  const inputB = editForm.querySelector("#inputB");
-  profileName.textContent = inputA.value;
-  profileRole.textContent = inputB.value;
+  const inputName = editForm.querySelector("#inputName");
+  const inputRole = editForm.querySelector("#inputRole");
+  profileName.textContent = inputName.value;
+  profileRole.textContent = inputRole.value;
   e.preventDefault();
   togglePopup(popUpElement);
 }
@@ -109,12 +109,12 @@ function submitProfileForm(e) {
 function submitNewPlaceForm(e) {
   const createPlaceForm = e.target;
   const popUpElement = e.target.parentNode.parentNode;
-  let inputA = createPlaceForm.querySelector("#inputA");
-  let inputB = createPlaceForm.querySelector("#inputB");
-  let newCard = { name: inputA.value, link: inputB.value };
+  let inputTitle = createPlaceForm.querySelector("#inputTitle");
+  let inputLink = createPlaceForm.querySelector("#inputLink");
+  let newCard = { name: inputTitle.value, link: inputLink.value };
   prependCard(createCard(newCard));
-  inputA.value = "";
-  inputB.value = "";
+  inputTitle.value = "";
+  inputLink.value = "";
   e.preventDefault();
   togglePopup(popUpElement);
 }
