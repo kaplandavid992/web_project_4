@@ -81,10 +81,11 @@ function addImageFormDisplay() {
 }
 
 function imagePopUp(e) {
-  const imageFile =  document.querySelector(".popup__imagePopUp");
+  const imageFile = document.querySelector(".popup__imagePopUp");
   const imageText = document.querySelector(".popup__imagePopUp-text");
   imageFile.src = e.target.src;
-  imageText.textContent = e.target.nextElementSibling.nextElementSibling.textContent;
+  imageText.textContent =
+    e.target.nextElementSibling.nextElementSibling.textContent;
   imageFile.alt = "view of " + imageText.textContent;
   const popUpElement = document.querySelector("#imagePopUp");
   togglePopup(popUpElement);

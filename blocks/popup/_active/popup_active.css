@@ -1,19 +1,18 @@
-@keyframes popUpTransition 
-{
-    0% {
-        opacity: 0;
-    }
-    10% {
-        opacity: .1;
-    }
+@keyframes popUpTransition {
+  0% {
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.1;
+  }
   25% {
-    opacity: .25;
+    opacity: 0.25;
   }
   50% {
-    opacity: .5;
+    opacity: 0.5;
   }
   75% {
-    opacity: .75;
+    opacity: 0.75;
   }
   100% {
     opacity: 1;
@@ -24,9 +23,7 @@
   display: flex;
   visibility: visible;
   animation-name: popUpTransition;
-  animation-duration: .7s;
+  animation-duration: 0.7s;
   animation-fill-mode: forwards;
   animation-iteration-count: 1;
-
-  animation-direction: normal;
 }
