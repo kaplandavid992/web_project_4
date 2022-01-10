@@ -1,6 +1,7 @@
 const profileEditBtn = document.querySelector(".profile__edit-btn");
 const profileAddBtn = document.querySelector(".profile__add-btn");
 const popupExitBtn = document.querySelectorAll(".popup__exit-btn");
+const forms = document.querySelectorAll(".popup__form");
 const popup = document.querySelector(".popup");
 const popUpWindow = document.querySelector(".popup__window");
 
@@ -98,28 +99,41 @@ initialCards.forEach((card) => {
   insertCard(createCard(card));
 });
 
-function submitForm(e) {
-  function saveForm() {
-    const inputA = formItem.querySelector("#inputA");
-    const inputB = formItem.querySelector("#inputB");
-    profileName.textContent = inputA.value;
-    profileRole.textContent = inputB.value;
-  }
-
-  function addImageCreate() {
-    const inputA = formItem.querySelector("#inputA");
-    const inputB = formItem.querySelector("#inputB");
-    let newCard = { name: inputA.value, link: inputB.value };
-    prependCard(createCard(newCard));
-  }
-
-  formItem.id === "editProfile" ? saveForm() : addImageCreate();
+function submitProfileForm(e) {
+  const editForm = e.target;
+  const popUpElement = e.target.parentNode.parentNode;
+  const inputA = editForm.querySelector("#inputA");
+  const inputB = editForm.querySelector("#inputB");
+  profileName.textContent = inputA.value;
+  profileRole.textContent = inputB.value;
   e.preventDefault();
-  togglePopupDisplay();
+  togglePopup(popUpElement);
+}
+
+function submitNewPlaceForm(e) {
+  const createPlaceForm = e.target;
+  const popUpElement = e.target.parentNode.parentNode;
+  let inputA = createPlaceForm.querySelector("#inputA");
+  let inputB = createPlaceForm.querySelector("#inputB");
+  let newCard = { name: inputA.value, link: inputB.value };
+  prependCard(createCard(newCard));
+  inputA.value="";
+  inputB.value="";
+  e.preventDefault();
+  togglePopup(popUpElement);
 }
 
 profileEditBtn.addEventListener("click", editProfileFormDisplay);
 profileAddBtn.addEventListener("click", addImageFormDisplay);
 [...popupExitBtn].forEach((btn) =>
-  btn.addEventListener("click", function(){togglePopup(btn.parentNode.parentNode)})
+  btn.addEventListener("click", function () {
+    togglePopup(btn.parentNode.parentNode);
+  })
 );
+
+document
+  .querySelector("#editProfileForm")
+  .addEventListener("submit", submitProfileForm);
+document
+  .querySelector("#createNewPlaceForm")
+  .addEventListener("submit", submitNewPlaceForm);
