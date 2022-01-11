@@ -1,25 +1,5 @@
-@keyframes popUpExitTransition {
-  0% {
-    opacity: 1;
-    visibility: visible;
-  }
-  25% {
-    opacity: 0.75;
-  }
-  50% {
-    opacity: 0.5;
-  }
-  75% {
-    opacity: 0.25;
-  }
-  100% {
-    opacity: 0;
-    visibility: hidden;
-  }
-}
 
 .popup {
-  display: none;
   visibility: hidden;
   position: fixed;
   justify-content: center;
@@ -28,7 +8,7 @@
   height: 100%;
   z-index: 1;
   background: #00000080;
-  animation-name: popUpExitTransition;
-  animation-duration: 0.7s;
-  animation-iteration-count: 1;
+  opacity: 0;
+  display: flex;
+  transition: visibility 0.3s, opacity 0.3s linear;
 }

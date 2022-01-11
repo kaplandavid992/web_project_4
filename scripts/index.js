@@ -1,10 +1,21 @@
 const profileEditBtn = document.querySelector(".profile__edit-btn");
 const profileAddBtn = document.querySelector(".profile__add-btn");
-const popupExitBtn = document.querySelectorAll(".popup__exit-btn");
+const popupExitBtns = document.querySelectorAll(".popup__exit-btn");
 const cardTemplate = document.querySelector("#card-template");
 const cardsList = document.querySelector(".elements__list");
 const profileName = document.querySelector(".profile__name");
 const profileRole = document.querySelector(".profile__role");
+const profilePopUp = document.querySelector("#editProfile");
+const editForm = document.querySelector("#editProfileForm");
+const inputName = editForm.querySelector("#inputName");
+const inputRole = editForm.querySelector("#inputRole");
+const addImagePopUp = document.querySelector("#addImage");
+const createPlaceForm = document.querySelector("#createNewPlaceForm");
+const imagePopUp = document.querySelector("#imagePopUp");
+const imageFile = document.querySelector(".popup__imagePopUp");
+const imageText = document.querySelector(".popup__imagePopUp-text");
+const inputTitle = createPlaceForm.querySelector("#inputTitle");
+const inputLink = createPlaceForm.querySelector("#inputLink");
 
 const initialCards = [
   {
@@ -45,12 +56,12 @@ function createCard(card) {
   const deleteIcon = clonedCard.querySelector(".elements__delete-icon");
   svgHeartBtn.addEventListener("click", toggleLikeBtn);
   deleteIcon.addEventListener("click", deleteCard);
-  cardImage.addEventListener("click", imagePopUp);
+  cardImage.addEventListener("click", imagePopUpAction);
   return clonedCard;
 }
 
 function deleteCard(e) {
-  e.target.parentNode.remove();
+  e.target.closest(".elements__element").remove();
 }
 
 function toggleLikeBtn(e) {
@@ -66,29 +77,23 @@ function prependCard(card) {
 }
 
 function togglePopup(popUpElement) {
-  popUpElement.style.display = "flex";
   popUpElement.classList.toggle("popup_active");
 }
 
 function editProfileFormDisplay() {
-  const popUpElement = document.querySelector("#editProfile");
-  togglePopup(popUpElement);
+  togglePopup(profilePopUp);
 }
 
 function addImageFormDisplay() {
-  const popUpElement = document.querySelector("#createNewPlaceCardForm");
-  togglePopup(popUpElement);
+  togglePopup(addImagePopUp);
 }
 
-function imagePopUp(e) {
-  const imageFile = document.querySelector(".popup__imagePopUp");
-  const imageText = document.querySelector(".popup__imagePopUp-text");
+function imagePopUpAction(e) {
   imageFile.src = e.target.src;
   imageText.textContent =
     e.target.nextElementSibling.nextElementSibling.textContent;
   imageFile.alt = "view of " + imageText.textContent;
-  const popUpElement = document.querySelector("#imagePopUp");
-  togglePopup(popUpElement);
+  togglePopup(imagePopUp);
 }
 
 initialCards.forEach((card) => {
@@ -96,34 +101,26 @@ initialCards.forEach((card) => {
 });
 
 function submitProfileForm(e) {
-  const editForm = e.target;
-  const popUpElement = e.target.parentNode.parentNode;
-  const inputName = editForm.querySelector("#inputName");
-  const inputRole = editForm.querySelector("#inputRole");
   profileName.textContent = inputName.value;
   profileRole.textContent = inputRole.value;
   e.preventDefault();
-  togglePopup(popUpElement);
+  togglePopup(profilePopUp);
 }
 
 function submitNewPlaceForm(e) {
-  const createPlaceForm = e.target;
-  const popUpElement = e.target.parentNode.parentNode;
-  let inputTitle = createPlaceForm.querySelector("#inputTitle");
-  let inputLink = createPlaceForm.querySelector("#inputLink");
-  let newCard = { name: inputTitle.value, link: inputLink.value };
+  const newCard = { name: inputTitle.value, link: inputLink.value };
   prependCard(createCard(newCard));
   inputTitle.value = "";
   inputLink.value = "";
   e.preventDefault();
-  togglePopup(popUpElement);
+  togglePopup(addImagePopUp);
 }
 
 profileEditBtn.addEventListener("click", editProfileFormDisplay);
 profileAddBtn.addEventListener("click", addImageFormDisplay);
-[...popupExitBtn].forEach((btn) =>
+[...popupExitBtns].forEach((btn) =>
   btn.addEventListener("click", function () {
-    togglePopup(btn.parentNode.parentNode);
+    togglePopup(btn.closest(".popup"));
   })
 );
 
