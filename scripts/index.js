@@ -1,15 +1,21 @@
-let profileEditBtn = document.querySelector(".profile__edit-btn");
-let profileAddBtn = document.querySelector(".profile__add-btn");
-let popupExitBtn = document.querySelector(".popup__exit-btn");
-let popup = document.querySelector(".popup");
-let popUpWindow = document.querySelector(".popup__window");
-const formTemplate = document.querySelector("#form-template");
+const profileEditBtn = document.querySelector(".profile__edit-btn");
+const profileAddBtn = document.querySelector(".profile__add-btn");
+const popupExitBtns = document.querySelectorAll(".popup__exit-btn");
 const cardTemplate = document.querySelector("#card-template");
-const imagePopUpTemplate = document.querySelector("#imagePopUp-template");
-let profileName = document.querySelector(".profile__name");
-let profileRole = document.querySelector(".profile__role");
-
-let cardsList = document.querySelector(".elements__list");
+const cardsList = document.querySelector(".elements__list");
+const profileName = document.querySelector(".profile__name");
+const profileRole = document.querySelector(".profile__role");
+const profilePopUp = document.querySelector("#editProfile");
+const editForm = document.querySelector("#editProfileForm");
+const inputName = editForm.querySelector("#inputName");
+const inputRole = editForm.querySelector("#inputRole");
+const addImagePopUp = document.querySelector("#addImage");
+const createPlaceForm = document.querySelector("#createNewPlaceForm");
+const imagePopUp = document.querySelector("#imagePopUp");
+const imageFile = document.querySelector(".popup__imagePopUp");
+const imageText = document.querySelector(".popup__imagePopUp-text");
+const inputTitle = createPlaceForm.querySelector("#inputTitle");
+const inputLink = createPlaceForm.querySelector("#inputLink");
 
 const initialCards = [
   {
@@ -38,61 +44,24 @@ const initialCards = [
   },
 ];
 
-const formValues = [
-  {
-    header: "Edit profile",
-    inputPlaceholderA: "Name",
-    inputNameA: "form__name",
-    inputAvalue: profileName.textContent,
-    inputPlaceholderB: "About me",
-    inputNameB: "form__role",
-    inputBvalue: profileRole.textContent,
-    submitBtnTxt: "Save",
-    id: "editProfile",
-    classModifier: "editProfile",
-  },
-  {
-    header: "Create place",
-    inputPlaceholderA: "Title",
-    inputNameA: "form__title",
-    inputAvalue: "",
-    inputPlaceholderB: "Image link",
-    inputNameB: "form__imageLink",
-    inputBvalue: "",
-    submitBtnTxt: "Create",
-    id: "addImage",
-    classModifier: "addImage",
-  },
-];
-
 function createCard(card) {
   const clonedCard = cardTemplate.content
     .querySelector(".elements__element")
     .cloneNode(true);
-  clonedCard.querySelector(".elements__image").src = card.link;
+  const cardImage = clonedCard.querySelector(".elements__image");
+  cardImage.src = card.link;
+  cardImage.alt = "nice view of " + card.name;
   clonedCard.querySelector(".elements__text").textContent = card.name;
   const svgHeartBtn = clonedCard.querySelector(".elements__like-btn");
   const deleteIcon = clonedCard.querySelector(".elements__delete-icon");
   svgHeartBtn.addEventListener("click", toggleLikeBtn);
   deleteIcon.addEventListener("click", deleteCard);
-  const cardImage = clonedCard.querySelector(".elements__image");
-  cardImage.addEventListener("click", imagePopUpCreate);
+  cardImage.addEventListener("click", imagePopUpAction);
   return clonedCard;
 }
 
-function imagePopUpCreate(e) {
-  let clonedImagePopUp = imagePopUpTemplate.content.cloneNode(true);
-  clonedImagePopUp.querySelector(".popup__imagePopUp").src = e.target.src;
-  clonedImagePopUp.querySelector(".popup__imagePopUp-text").textContent =
-    e.target.nextElementSibling.nextElementSibling.textContent;
-  popUpWindow.appendChild(clonedImagePopUp);
-  popUpWindow.classList.add("popup__window_imagePopUp");
-  console.log(popUpWindow);
-  popup.classList.toggle("popup_active");
-}
-
 function deleteCard(e) {
-  e.target.parentNode.remove();
+  e.target.closest(".elements__element").remove();
 }
 
 function toggleLikeBtn(e) {
@@ -107,77 +76,57 @@ function prependCard(card) {
   cardsList.prepend(card);
 }
 
-function createForm(form) {
-  globalThis.clonedForm = formTemplate.content
-    .querySelector(".popup__form")
-    .cloneNode(true);
-  clonedForm.classList.add(`popup__form_${form.classModifier}`);
-  clonedForm.querySelector(".popup__form-header").textContent = form.header;
-  clonedForm.querySelector("#inputA").placeholder = form.inputPlaceholderA;
-  clonedForm.querySelector("#inputA").name = form.inputNameA;
-  clonedForm.querySelector("#inputA").value = form.inputAvalue;
-  clonedForm.querySelector("#inputB").placeholder = form.inputPlaceholderB;
-  clonedForm.querySelector("#inputB").name = form.inputNameB;
-  clonedForm.querySelector("#inputB").value = form.inputBvalue;
-  clonedForm.id = form.id;
-  clonedForm.querySelector(".popup__form-submit-btn").textContent =
-    form.submitBtnTxt;
-  clonedForm.addEventListener("submit", submitForm);
-  return clonedForm;
+function togglePopup(popUpElement) {
+  popUpElement.classList.toggle("popup_active");
 }
 
-function insertForm(form) {
-  popUpWindow.appendChild(form);
+function editProfileFormDisplay() {
+  togglePopup(profilePopUp);
 }
 
-function togglePopupDisplay() {
-  popup.classList.toggle("popup_active");
-  if(popup.querySelector(".popup__imagePopUp-text").textContent) {
-    popup.querySelector(".popup__imagePopUp").remove();
-    popup.querySelector(".popup__imagePopUp-text").remove();
-  }
+function addImageFormDisplay() {
+  togglePopup(addImagePopUp);
 }
 
-function editProfile() {
-  document.querySelector(".popup__form") === null
-    ? null
-    : popUpWindow.lastChild.remove();
-  insertForm(createForm(formValues[0]));
-  togglePopupDisplay();
-}
-
-function addImage() {
-  document.querySelector(".popup__form") === null
-    ? null
-    : popUpWindow.lastChild.remove();
-  insertForm(createForm(formValues[1]));
-  togglePopupDisplay();
+function imagePopUpAction(e) {
+  imageFile.src = e.target.src;
+  imageText.textContent =
+    e.target.nextElementSibling.nextElementSibling.textContent;
+  imageFile.alt = "view of " + imageText.textContent;
+  togglePopup(imagePopUp);
 }
 
 initialCards.forEach((card) => {
   insertCard(createCard(card));
 });
 
-function submitForm(e) {
-  function saveForm() {
-    const inputA = clonedForm.querySelector("#inputA");
-    const inputB = clonedForm.querySelector("#inputB");
-    profileName.textContent = inputA.value;
-    profileRole.textContent = inputB.value;
-  }
-
-  function addImageCreate() {
-    const inputA = clonedForm.querySelector("#inputA");
-    const inputB = clonedForm.querySelector("#inputB");
-    let newCard = { name: inputA.value, link: inputB.value };
-    prependCard(createCard(newCard));
-  }
-
-  clonedForm.id === "editProfile" ? saveForm() : addImageCreate();
+function submitProfileForm(e) {
+  profileName.textContent = inputName.value;
+  profileRole.textContent = inputRole.value;
   e.preventDefault();
-  togglePopupDisplay();
+  togglePopup(profilePopUp);
 }
 
-profileEditBtn.addEventListener("click", editProfile);
-profileAddBtn.addEventListener("click", addImage);
-popupExitBtn.addEventListener("click", togglePopupDisplay);
+function submitNewPlaceForm(e) {
+  const newCard = { name: inputTitle.value, link: inputLink.value };
+  prependCard(createCard(newCard));
+  inputTitle.value = "";
+  inputLink.value = "";
+  e.preventDefault();
+  togglePopup(addImagePopUp);
+}
+
+profileEditBtn.addEventListener("click", editProfileFormDisplay);
+profileAddBtn.addEventListener("click", addImageFormDisplay);
+[...popupExitBtns].forEach((btn) =>
+  btn.addEventListener("click", function () {
+    togglePopup(btn.closest(".popup"));
+  })
+);
+
+document
+  .querySelector("#editProfileForm")
+  .addEventListener("submit", submitProfileForm);
+document
+  .querySelector("#createNewPlaceForm")
+  .addEventListener("submit", submitNewPlaceForm);
