@@ -12,6 +12,7 @@
 @import url(../blocks/popup/__form-header/popup__form-header.css);
 @import url(../blocks/popup/__form-input/popup__form-input.css);
 @import url(../blocks/popup/__form-errorMsg/popup__form-errorMsg.css);
+@import url(../blocks/popup/__form-control/popup__form-control.css);
 @import url(../blocks/popup/__form-errorMsg_active/popup__form-errorMsg_active.css);
 @import url(../blocks/popup/__form-submit-btn/popup__form-submit-btn.css);
 

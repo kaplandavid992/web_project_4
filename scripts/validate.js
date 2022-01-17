@@ -24,7 +24,7 @@ const showInputError = (formElement, inputElement, errorMessage) => {
 const hideInputError = (formElement, inputElement) => {
   const errorElement = formElement.querySelector(`#${inputElement.id}-error`);
   errorElement.classList.remove("popup__form-errorMsg_active");
-  // errorElement.textContent = "";
+  errorElement.textContent = "";
 };
 
 const checkInputValidity = (formElement, inputElement) => {

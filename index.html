@@ -17,20 +17,23 @@
             alt="exit icon button"
           />
         </button>
-        <form class="popup__form" name="popup__form" id="editProfileForm" >
+        <form class="popup__form" name="popup__form" id="editProfileForm">
           <h2 class="popup__form-header">Edit profile</h2>
-          <input
-            id="inputName"
-            type="text"
-            class="popup__form-input"
-            placeholder="Name"
-            name="form__name"
-            value="Jacques Cousteau"
-            required
-            maxlength="40"
-            minlength="2"
-          />
-          <span class="popup__form-errorMsg" id="inputName-error"></span>
+          <div class="popup__form-control">
+            <input
+              id="inputName"
+              type="text"
+              class="popup__form-input"
+              placeholder="Name"
+              name="form__name"
+              value="Jacques Cousteau"
+              required
+              maxlength="40"
+              minlength="2"
+            />
+            <span class="popup__form-errorMsg" id="inputName-error"></span>
+          </div>
+          <div class="popup__form-control">
           <input
             id="inputRole"
             type="text"
@@ -43,6 +46,7 @@
             minlength="2"
           />
           <p class="popup__form-errorMsg" id="inputRole-error"></p>
+        </div>
           <button class="popup__form-submit-btn" type="submit" aria-label="">
             Save
           </button>
@@ -60,8 +64,9 @@
           />
         </button>
 
-        <form class="popup__form" name="popup__form" id="createNewPlaceForm" >
+        <form class="popup__form" name="popup__form" id="createNewPlaceForm">
           <h2 class="popup__form-header">Create place</h2>
+          <div class="popup__form-control">
           <input
             type="text"
             class="popup__form-input"
@@ -72,7 +77,9 @@
             minlength="1"
             maxlength="30"
           />
-          <p class="popup__form-errorMsg"></p>
+          <p class="popup__form-errorMsg" id="inputTitle-error"></p>
+          </div>
+          <div class="popup__form-control">
           <input
             id="inputLink"
             type="url"
@@ -81,7 +88,8 @@
             name="form__imageLink"
             required
           />
-          <p class="popup__form-errorMsg"></p>
+          <p class="popup__form-errorMsg" id="inputLink-error"></p>
+          </div>
           <button class="popup__form-submit-btn" type="submit" aria-label="">
             Create
           </button>
@@ -98,7 +106,7 @@
             alt="exit icon button"
           />
         </button>
-        <img src=" " class="popup__imagePopUp" alt=" "/>
+        <img src=" " class="popup__imagePopUp" alt=" " />
         <p class="popup__imagePopUp-text"></p>
       </div>
     </div>
