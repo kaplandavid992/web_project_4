@@ -16,13 +16,13 @@
   font-style: normal;
 }
 
-/* .popup__form-input:first-of-type {
+.popup__form-input:first-of-type {
   margin-bottom: 30px;
 }
 
 .popup__form-input:last-of-type {
   margin-bottom: 48px;
-} */
+}
 
 @media screen and (max-width: 450px) {
   .popup__form-input:last-of-type {
@@ -34,6 +34,3 @@
   border-bottom: 1px solid red;
 } 
 
-/* .popup__form-input:valid {
-
-} */
