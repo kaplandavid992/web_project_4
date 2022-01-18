@@ -4,6 +4,8 @@
   line-height: 1.21;
   color: #ff0000;
   visibility: hidden;
+  position: absolute;
+  margin-top: 5px;
 }
 
 
