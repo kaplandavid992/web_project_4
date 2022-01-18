@@ -132,6 +132,13 @@ profileAddBtn.addEventListener("click", addImageFormDisplay);
   })
 );
 
+window.addEventListener("keydown", function (e) {
+  const thisPopup = document.querySelector(".popup_active");
+  if (e.key === "Escape") {
+    togglePopup(thisPopup);
+  }
+});
+
 document
   .querySelector("#editProfileForm")
   .addEventListener("submit", submitProfileForm);
