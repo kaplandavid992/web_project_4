@@ -1,8 +1,3 @@
-//If any field doesn't pass validation, the "Save" button should be inactive.
-
-//If both fields pass validation, then they should be active.
-
-//Use the colors from the design for the inactive buttons.
 
 // enabling validation by calling enableValidation()
 // pass all the settings on call
@@ -35,16 +30,20 @@ const checkInputValidity = (formElement, inputElement) => {
   }
 };
 
-function setEventListeners(formElement) {
+const setEventListeners = (formElement) => {
   const inputList = Array.from(
     formElement.querySelectorAll(".popup__form-input")
   );
+  const buttonElement = formElement.querySelector(".popup__form-submit-btn");
+  toggleButtonState(inputList, buttonElement);
+
   inputList.forEach((inputElement) => {
     inputElement.addEventListener("input", function () {
       checkInputValidity(formElement, inputElement);
+      toggleButtonState(inputList, buttonElement);
     });
   });
-}
+};
 
 function enableValidation() {
   const formList = Array.from(document.querySelectorAll(".popup__form"));
@@ -55,4 +54,19 @@ function enableValidation() {
     setEventListeners(formElement);
   });
 }
+
+const hasInvalidInput = (inputList) => {
+  return inputList.some((inputElement) => {
+    return !inputElement.validity.valid;
+  });
+};
+
+const toggleButtonState = (inputList, buttonElement) => {
+  if (hasInvalidInput(inputList)) {
+    buttonElement.classList.add("popup__form-submit-btn_inactive");
+  } else {
+    buttonElement.classList.remove("popup__form-submit-btn_inactive");
+  }
+};
+
 enableValidation();
