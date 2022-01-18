@@ -58,8 +58,23 @@ const toggleButtonState = (inputList, buttonElement) => {
 };
 
 const resetValidation = (formElement) => {
-  formElement.reset();
-}
+  const inputList = formElement.querySelectorAll(".popup__form-input");
+  hideInputError(formElement, inputList[0]);
+  hideInputError(formElement, inputList[1]);
+  if (formElement.id === "editProfileForm") {
+    const profileName = document.querySelector(".profile__name");
+    const profileRole = document.querySelector(".profile__role");
+    inputList[0].value = profileName.textContent;
+    inputList[1].value = profileRole.textContent;
+  } else {
+    inputList[0].value = "";
+    inputList[1].value = "";
+  }
+  const buttonElement = formElement.querySelector(".popup__form-submit-btn");
+  buttonElement.classList.contains("popup__form-submit-btn_inactive")
+    ? null
+    : buttonElement.classList.add("popup__form-submit-btn_inactive");
+};
 
 enableValidation();
 // enableValidation({

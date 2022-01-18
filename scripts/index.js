@@ -108,7 +108,6 @@ function submitProfileForm(e) {
   profileRole.textContent = inputRole.value;
   e.preventDefault();
   togglePopup(profilePopUp);
-  resetValidation(profilePopUp);
 }
 
 function submitNewPlaceForm(e) {
@@ -118,7 +117,6 @@ function submitNewPlaceForm(e) {
   inputLink.value = "";
   e.preventDefault();
   togglePopup(addImagePopUp);
-  resetValidation(addImagePopUp);
 }
 
 profileEditBtn.addEventListener("click", editProfileFormDisplay);
@@ -126,6 +124,7 @@ profileAddBtn.addEventListener("click", addImageFormDisplay);
 
 [...popupExitBtns].forEach((btn) =>
   btn.addEventListener("click", function () {
+    resetValidation(btn.nextElementSibling);
     togglePopup(btn.closest(".popup"));
   })
 );
