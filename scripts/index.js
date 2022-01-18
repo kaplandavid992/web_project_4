@@ -1,3 +1,5 @@
+import { resetValidation } from "./validate.js";
+
 const profileEditBtn = document.querySelector(".profile__edit-btn");
 const profileAddBtn = document.querySelector(".profile__add-btn");
 const popupExitBtns = document.querySelectorAll(".popup__exit-btn");
@@ -106,6 +108,7 @@ function submitProfileForm(e) {
   profileRole.textContent = inputRole.value;
   e.preventDefault();
   togglePopup(profilePopUp);
+  resetValidation(profilePopUp);
 }
 
 function submitNewPlaceForm(e) {
@@ -115,6 +118,7 @@ function submitNewPlaceForm(e) {
   inputLink.value = "";
   e.preventDefault();
   togglePopup(addImagePopUp);
+  resetValidation(addImagePopUp);
 }
 
 profileEditBtn.addEventListener("click", editProfileFormDisplay);
@@ -126,18 +130,15 @@ profileAddBtn.addEventListener("click", addImageFormDisplay);
   })
 );
 
-[...popupList].forEach((popup) =>
+[...popupList].forEach(function (popup) {
+  const popupWindow = popup.querySelector(".popup__window");
+  popupWindow.addEventListener("click", function (e) {
+    e.stopPropagation();
+  });
   popup.addEventListener("click", function (e) {
-    const thisPopup = document.querySelector(".popup_active");
-    const popupWindow = thisPopup.querySelector(".popup__window");
-    popupWindow.addEventListener("click", function(e) {
-      e.stopImmediatePropagation();
-    });
-    togglePopup(thisPopup);
-  })
-);
-
-
+    togglePopup(e.target);
+  });
+});
 
 window.addEventListener("keydown", function (e) {
   const thisPopup = document.querySelector(".popup_active");
