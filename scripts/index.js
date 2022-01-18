@@ -1,6 +1,7 @@
 const profileEditBtn = document.querySelector(".profile__edit-btn");
 const profileAddBtn = document.querySelector(".profile__add-btn");
 const popupExitBtns = document.querySelectorAll(".popup__exit-btn");
+const popupList = document.querySelectorAll(".popup");
 const cardTemplate = document.querySelector("#card-template");
 const cardsList = document.querySelector(".elements__list");
 const profileName = document.querySelector(".profile__name");
@@ -118,9 +119,16 @@ function submitNewPlaceForm(e) {
 
 profileEditBtn.addEventListener("click", editProfileFormDisplay);
 profileAddBtn.addEventListener("click", addImageFormDisplay);
+
 [...popupExitBtns].forEach((btn) =>
   btn.addEventListener("click", function () {
     togglePopup(btn.closest(".popup"));
+  })
+);
+
+[...popupList].forEach((popup) =>
+  popup.addEventListener("click", function (e) {
+    togglePopup(e.target);
   })
 );
 
