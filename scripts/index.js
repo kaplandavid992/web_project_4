@@ -128,9 +128,16 @@ profileAddBtn.addEventListener("click", addImageFormDisplay);
 
 [...popupList].forEach((popup) =>
   popup.addEventListener("click", function (e) {
-    togglePopup(e.target);
+    const thisPopup = document.querySelector(".popup_active");
+    const popupWindow = thisPopup.querySelector(".popup__window");
+    popupWindow.addEventListener("click", function(e) {
+      e.stopImmediatePropagation();
+    });
+    togglePopup(thisPopup);
   })
 );
+
+
 
 window.addEventListener("keydown", function (e) {
   const thisPopup = document.querySelector(".popup_active");
