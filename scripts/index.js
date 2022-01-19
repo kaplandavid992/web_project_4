@@ -69,7 +69,7 @@ function deleteCard(e) {
 
 function toggleLikeBtn(e) {
   e.target.classList.toggle("elements__svg-heart_liked");
-}
+} 
 
 function insertCard(card) {
   cardsList.appendChild(card);
@@ -79,8 +79,18 @@ function prependCard(card) {
   cardsList.prepend(card);
 }
 
+function escapeKey(evt){
+  if (evt.key === "Escape") {
+    document.querySelector(".popup_active").classList.remove("popup_active");
+    document.removeEventListener("keydown", escapeKey);
+  }
+  };
+
 function togglePopup(popUpElement) {
   popUpElement.classList.toggle("popup_active");
+  if(popUpElement.classList.contains("popup_active")) {
+    document.addEventListener("keydown", escapeKey);
+    } 
 }
 
 function editProfileFormDisplay() {
@@ -139,13 +149,6 @@ profileAddBtn.addEventListener("click", addImageFormDisplay);
     const formElement = popup.querySelector(".popup__form");
     resetValidation(formElement);
   });
-});
-
-window.addEventListener("keydown", function (e) {
-  const thisPopup = document.querySelector(".popup_active");
-  if (e.key === "Escape") {
-    togglePopup(thisPopup);
-  }
 });
 
 document
