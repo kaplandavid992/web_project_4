@@ -135,7 +135,8 @@ profileAddBtn.addEventListener("click", addImageFormDisplay);
 [...popupExitBtns].forEach((btn) =>
   btn.addEventListener("click", function () {
     togglePopup(btn.closest(".popup"));
-    resetValidation(btn.nextElementSibling);
+    if (btn.nextElementSibling.tagName ==="FORM"){
+    resetValidation(btn.nextElementSibling);}
   })
 );
 
@@ -147,7 +148,7 @@ profileAddBtn.addEventListener("click", addImageFormDisplay);
   popup.addEventListener("click", function (e) {
     togglePopup(e.target);
     const formElement = popup.querySelector(".popup__form");
-    resetValidation(formElement);
+    if(formElement){resetValidation(formElement);} 
   });
 });
 
