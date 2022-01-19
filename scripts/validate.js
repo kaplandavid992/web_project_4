@@ -18,31 +18,6 @@ const checkInputValidity = (formElement, inputElement) => {
   }
 };
 
-const setEventListeners = (formElement) => {
-  const inputList = Array.from(
-    formElement.querySelectorAll(".popup__form-input")
-  );
-  const buttonElement = formElement.querySelector(".popup__form-submit-btn");
-  toggleButtonState(inputList, buttonElement);
-
-  inputList.forEach((inputElement) => {
-    inputElement.addEventListener("input", function () {
-      checkInputValidity(formElement, inputElement);
-      toggleButtonState(inputList, buttonElement);
-    });
-  });
-};
-
-function enableValidation() {
-  const formList = Array.from(document.querySelectorAll(".popup__form"));
-  formList.forEach((formElement) => {
-    formElement.addEventListener("submit", (evt) => {
-      evt.preventDefault();
-    });
-    setEventListeners(formElement);
-  });
-}
-
 const hasInvalidInput = (inputList) => {
   return inputList.some((inputElement) => {
     return !inputElement.validity.valid;
@@ -56,6 +31,25 @@ const toggleButtonState = (inputList, buttonElement) => {
     buttonElement.classList.remove("popup__form-submit-btn_inactive");
   }
 };
+
+function enableValidation(settings) {
+  const { formSelector, submitButtonSelector, inputSelector } = settings;
+  const formList = Array.from(document.querySelectorAll(formSelector));
+  formList.forEach((formElement) => {
+    formElement.addEventListener("submit", (evt) => {
+      evt.preventDefault();
+    });
+    const inputList = Array.from(formElement.querySelectorAll(inputSelector));
+    const buttonElement = formElement.querySelector(submitButtonSelector);
+    toggleButtonState(inputList, buttonElement);
+    inputList.forEach((inputElement) => {
+      inputElement.addEventListener("input", function () {
+        checkInputValidity(formElement, inputElement);
+        toggleButtonState(inputList, buttonElement);
+      });
+    });
+  });
+}
 
 const resetValidation = (formElement) => {
   const inputList = formElement.querySelectorAll(".popup__form-input");
@@ -76,14 +70,13 @@ const resetValidation = (formElement) => {
     : buttonElement.classList.add("popup__form-submit-btn_inactive");
 };
 
-enableValidation();
-// enableValidation({
-//   formSelector: ".popup__form",
-//   inputSelector: ".popup__input",
-//   submitButtonSelector: ".popup__button",
-//   inactiveButtonClass: "popup__button_disabled",
-//   inputErrorClass: "popup__input_type_error",
-//   errorClass: "popup__error_visible"
-// });
+enableValidation({
+  formSelector: ".popup__form",
+  inputSelector: ".popup__form-input",
+  submitButtonSelector: ".popup__form-submit-btn",
+  inactiveButtonClass: ".popup__form-submit-btn_inactive",
+  inputErrorClass: "popup__form-errorMsg",
+  errorClass: "popup__form-errorMsg_active",
+});
 
 export { resetValidation };
