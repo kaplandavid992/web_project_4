@@ -17,7 +17,7 @@
             alt="exit icon button"
           />
         </button>
-        <form class="popup__form" name="popup__form" id="editProfileForm">
+        <form class="popup__form" name="popup__form" id="editProfileForm" novalidate>
           <h2 class="popup__form-header">Edit profile</h2>
           <div class="popup__form-control">
             <input
@@ -34,19 +34,19 @@
             <p class="popup__form-errorMsg" id="inputName-error"></p>
           </div>
           <div class="popup__form-control">
-          <input
-            id="inputRole"
-            type="text"
-            class="popup__form-input"
-            placeholder="About me"
-            name="form__role"
-            value="Explorer"
-            required
-            maxlength="200"
-            minlength="2"
-          />
-          <p class="popup__form-errorMsg" id="inputRole-error"></p>
-        </div>
+            <input
+              id="inputRole"
+              type="text"
+              class="popup__form-input"
+              placeholder="About me"
+              name="form__role"
+              value="Explorer"
+              required
+              maxlength="200"
+              minlength="2"
+            />
+            <p class="popup__form-errorMsg" id="inputRole-error"></p>
+          </div>
           <button class="popup__form-submit-btn" type="submit" aria-label="">
             Save
           </button>
@@ -64,33 +64,34 @@
           />
         </button>
 
-        <form class="popup__form" name="popup__form" id="createNewPlaceForm">
+        <form class="popup__form" name="popup__form" id="createNewPlaceForm" novalidate>
           <h2 class="popup__form-header">Create place</h2>
           <div class="popup__form-control">
-          <input
-            type="text"
-            class="popup__form-input"
-            id="inputTitle"
-            placeholder="Title"
-            name="form__title"
-            required
-            minlength="1"
-            maxlength="30"
-          />
-          <p class="popup__form-errorMsg" id="inputTitle-error"></p>
+            <input
+              type="text"
+              class="popup__form-input"
+              id="inputTitle"
+              placeholder="Title"
+              name="form__title"
+              required
+              minlength="1"
+              maxlength="30"
+            />
+            <p class="popup__form-errorMsg" id="inputTitle-error"></p>
           </div>
           <div class="popup__form-control">
-          <input
-            id="inputLink"
-            type="url"
-            class="popup__form-input"
-            placeholder="Image link"
-            name="form__imageLink"
-            required
-          />
-          <p class="popup__form-errorMsg" id="inputLink-error"></p>
+            <input
+              id="inputLink"
+              type="url"
+              class="popup__form-input"
+              placeholder="Image link"
+              name="form__imageLink"
+              required
+            />
+            <p class="popup__form-errorMsg" id="inputLink-error"></p>
           </div>
-          <button class="popup__form-submit-btn" type="submit" aria-label="">
+          <button class="popup__form-submit-btn" 
+                type="submit" aria-label="" disabled>
             Create
           </button>
         </form>
@@ -167,7 +168,7 @@
         </div>
       </li>
     </template>
-    <script  src="./scripts/index.js" type="module"></script>
-    <script  src="./scripts/validate.js" type="module"></script>
+    <script src="./scripts/index.js" type="module"></script>
+    <script src="./scripts/validate.js" type="module"></script>
   </body>
 </html>
