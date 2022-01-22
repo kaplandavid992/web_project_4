@@ -1,4 +1,4 @@
-const settings =  {
+const settings = {
   formSelector: ".popup__form",
   inputSelector: ".popup__form-input",
   submitButtonSelector: ".popup__form-submit-btn",
@@ -63,14 +63,16 @@ function enableValidation(settings) {
 }
 
 const resetValidation = (formElement) => {
-  const inputList = formElement.querySelectorAll(settings.inputSelector);
+  const inputList = Array.from(
+    formElement.querySelectorAll(settings.inputSelector)
+  );
   inputList.forEach((inputElement) => {
     hideInputError(formElement, inputElement);
   });
-  const buttonElement = formElement.querySelector(settings.submitButtonSelector);
-  buttonElement.classList.contains(settings.inactiveButtonClass)
-    ? null
-    : buttonElement.classList.add(settings.inactiveButtonClass);
+  const buttonElement = formElement.querySelector(
+    settings.submitButtonSelector
+  );
+  toggleButtonState(inputList, buttonElement);
 };
 
 enableValidation(settings);

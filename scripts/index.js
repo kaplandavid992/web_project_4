@@ -99,15 +99,11 @@ function closePopup(popUpElement) {
 
 function toggleProfileForm() {
   openPopup(profilePopUp);
-  editProfileForm.lastElementChild.classList
-  .toggle("popup__form-submit-btn_inactive");
   resetValidation(editProfileForm);
 }
 
 function toggleAddImageForm() {
   openPopup(addImagePopUp);
-  createNewPlaceForm.lastElementChild.classList
-  .toggle("popup__form-submit-btn_inactive");
   resetValidation(createNewPlaceForm);
 }
 
@@ -136,21 +132,16 @@ function submitNewPlaceForm(e) {
   closePopup(addImagePopUp);
   inputTitle.value = "";
   inputLink.value = "";
-  createNewPlaceForm.lastElementChild.disabled = true;
   e.preventDefault();
 }
 
-
 [...popupList].forEach(function (popup) {
-  const popupWindow = popup.querySelector(".popup__window");
-  popupWindow.addEventListener("click", function (e) {
-    e.stopPropagation();
-  });
-
   popup.addEventListener("mousedown", function (e) {
-    if (  (e.target.classList.contains("popup_active")) || 
-          (e.target.classList.contains("popup__exit-icon"))  ) {
-            closePopup(popup);
+    if (
+      e.target.classList.contains("popup_active") ||
+      e.target.classList.contains("popup__exit-icon")
+    ) {
+      closePopup(popup);
     }
   });
 });
@@ -159,4 +150,3 @@ profileEditBtn.addEventListener("click", toggleProfileForm);
 profileAddBtn.addEventListener("click", toggleAddImageForm);
 editProfileForm.addEventListener("submit", submitProfileForm);
 createNewPlaceForm.addEventListener("submit", submitNewPlaceForm);
-
