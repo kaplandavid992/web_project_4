@@ -1,3 +1,5 @@
+import { openPopup, closePopup } from "./utils.js"
+
 const popupImage = document.querySelector("#imagePopUp");
 const popupCloseButton = document.querySelector(".popup__exit-btn");
 
@@ -6,10 +8,12 @@ const imageText = document.querySelector(".popup__imagePopUp-text");
 
 
 export default class Card {
-  constructor(data, cardSelector) {
+  constructor(data, cardSelector, openPopup, closePopup) {
     this._text = data.text;
     this._image = data.image;
     this._cardSelector = cardSelector;
+    this.openPopup = openPopup;
+    this.closePopup = closePopup;
   }
 
   _getTemplate() {
@@ -29,11 +33,13 @@ export default class Card {
   }
 
   _setEventListeners() {
+    
     const elementLikeBtn = this._element.querySelector(".elements__like-btn");
     const deleteTrashBtn = this._element.querySelector(".elements__delete-icon");
     this._element.addEventListener("click", (e) => {
       this._handleImagePopup(e);
     });
+
     popupCloseButton.addEventListener("click", () => {
       this._handleClosePopup();
     });
@@ -56,21 +62,15 @@ export default class Card {
     imageText.textContent =
       e.target.nextElementSibling.nextElementSibling.textContent;
     imageFile.alt = "view of " + imageText.textContent;
-    popupImage.classList.add("popup_active");
-    document.addEventListener("keydown", this._escapeKey.bind(this));
+    openPopup(popupImage);
   }
 
 
   _handleClosePopup() {
     imageFile.src = "";
     imageFile.alt = "";
-    popupImage.classList.remove("popup_active");
-    document.removeEventListener("keydown", this._escapeKey);
+    closePopup(popupImage);
   } 
-
-  _escapeKey(e) {
-    e.key === "Escape" ? this._handleClosePopup.call() : null;
-  }
 }
 
 
