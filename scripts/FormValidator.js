@@ -21,13 +21,17 @@ export default class FormValidator {
     errorElement.textContent = "";
   }
 
-  _checkInputValidity(formElement, inputElement){
+  _checkInputValidity(formElement, inputElement) {
     if (!inputElement.validity.valid) {
-      this._showInputError(formElement, inputElement, inputElement.validationMessage);
+      this._showInputError(
+        formElement,
+        inputElement,
+        inputElement.validationMessage
+      );
     } else {
       this._hideInputError(formElement, inputElement);
     }
-  };
+  }
 
   _hasInvalidInput = (inputList) => {
     return inputList.some((inputElement) => {
@@ -59,7 +63,7 @@ export default class FormValidator {
   }
 
   enableValidation() {
-      const self = this;
+    const self = this;
     const formList = Array.from(document.querySelectorAll(this.formSelector));
     formList.forEach((formElement) => {
       formElement.addEventListener("submit", (evt) => {
