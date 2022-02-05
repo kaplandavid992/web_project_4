@@ -1,21 +1,19 @@
-import { openPopup, closePopup } from "./utils.js"
+import { openPopup } from "./utils.js"
 
 const popupImage = document.querySelector("#imagePopUp");
 const imageFile = popupImage.querySelector(".popup__imagePopUp");
 const imageText = popupImage.querySelector(".popup__imagePopUp-text");
 
 export default class Card {
-  constructor(data, cardSelector, openPopup, closePopup) {
+  constructor(data, templateSelector) {
     this._text = data.text;
     this._image = data.image;
-    this._cardSelector = cardSelector;
-    this.openPopup = openPopup;
-    this.closePopup = closePopup;
+    this._templateSelector = templateSelector;
   }
 
   _getTemplate() {
     const cardElement = document
-      .querySelector(this._cardSelector)
+      .querySelector(this._templateSelector)
       .content.querySelector(".elements__element")
       .cloneNode(true);
     return cardElement;
@@ -48,7 +46,7 @@ export default class Card {
   }
 
   _handleDeleteCard() {
-    this._element.closest(".elements__element").remove();
+    this._element.remove();
   }
 
   _handleLikeToggle() {
@@ -62,13 +60,6 @@ export default class Card {
     imageFile.alt = `view of ${this._text}`;
     openPopup(popupImage);
   }
-
-
-  _handleClosePopup() {
-    imageFile.src = "";
-    imageFile.alt = "";
-    closePopup(popupImage);
-  } 
 }
 
 

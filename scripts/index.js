@@ -19,7 +19,6 @@ const inputLink = createNewPlaceForm.querySelector("#inputLink");
 const popupList = document.querySelectorAll(".popup");
 
 const settings = {
-  formSelector: ".popup__form",
   inputSelector: ".popup__form-input",
   submitButtonSelector: ".popup__form-submit-btn",
   inactiveButtonClass: "popup__form-submit-btn_inactive",
@@ -43,10 +42,7 @@ newPlaceformValidator.enableValidation();
 
 [...popupList].forEach( function(popup) {
   const popupCloseButton = document.querySelector(".popup__exit-btn");
-  popupCloseButton.addEventListener("click", () => {
-    closePopup(popup);
-  });
-  popup.addEventListener("mousedown", function (e) {
+  popup.addEventListener("click", function (e) {
     if (
       e.target.classList.contains("popup_active") ||
       e.target.classList.contains("popup__exit-icon")
@@ -56,11 +52,11 @@ newPlaceformValidator.enableValidation();
   });
 });
 
-function toggleProfileForm() {
+function openProfileForm() {
   openPopup(profilePopUp);
 }
 
-function toggleAddImageForm() {
+function openAddImageForm() {
   openPopup(addImagePopUp);
 }
 
@@ -84,7 +80,7 @@ function submitNewPlaceForm(e) {
   inputLink.value = "";
 }
 
-profileEditBtn.addEventListener("click", toggleProfileForm);
-profileAddBtn.addEventListener("click", toggleAddImageForm);
+profileEditBtn.addEventListener("click", openProfileForm);
+profileAddBtn.addEventListener("click", openAddImageForm);
 editProfileForm.addEventListener("submit", submitProfileForm);
 createNewPlaceForm.addEventListener("submit", submitNewPlaceForm);

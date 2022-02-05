@@ -1,8 +1,6 @@
 function openPopup(popUpElement) {
   popUpElement.classList.add("popup_active");
-  if (popUpElement.classList.contains("popup_active")) {
-    document.addEventListener("keydown", escapeKey);
-  }
+  document.addEventListener("keydown", escapeKey);
 }
 
 function closePopup(popUpElement) {
