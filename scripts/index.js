@@ -54,6 +54,9 @@ newPlaceformValidator.enableValidation();
 
 function openProfileForm() {
   openPopup(profilePopUp);
+  inputName.value = profileName.textContent;
+  inputRole.value = profileRole.textContent;
+  profileFormValidator.resetValidation();
 }
 
 function openAddImageForm() {

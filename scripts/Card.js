@@ -36,8 +36,8 @@ export default class Card {
       this._handleImagePopup();
     });
 
-    elementLikeBtn.addEventListener("click", (e) => {
-        this._handleLikeToggle(e);
+    elementLikeBtn.addEventListener("click", () => {
+        this._handleLikeToggle();
     })
 
     deleteTrashBtn.addEventListener("click", ()=> {
@@ -50,7 +50,7 @@ export default class Card {
   }
 
   _handleLikeToggle() {
-    this._element.lastElementChild.lastElementChild
+    this._element.querySelector(".elements__like-btn")
     .classList.toggle("elements__svg-heart_liked");
   }
 
