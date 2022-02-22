@@ -1,4 +1,4 @@
-import { openPopup } from "./utils.js"
+
 
 const popupImage = document.querySelector("#imagePopUp");
 const imageFile = popupImage.querySelector(".popup__imagePopUp");
@@ -58,7 +58,7 @@ export default class Card {
     imageFile.src = this._image;
     imageText.textContent = this._text;
     imageFile.alt = `view of ${this._text}`;
-    openPopup(popupImage);
+    // openPopup(popupImage);
   }
 }
 

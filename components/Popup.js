@@ -1,23 +1,30 @@
-class Popup {
-    constructor(popupSelector){
-        this.popupSelector = popupSelector;
-    }
-    open(){
+export default class Popup {
+  constructor(popupSelector) {
+    this.popupElement = document.querySelector("#"+popupSelector);
+  }
 
-    }
-    close(){
+  open = () => {
+    this.popupElement.classList.add("popup_active");
+  }
 
+  close = () => {
+    this.popupElement.classList.remove("popup_active");
+  }
+
+  _handleEscClose = (evt) => {
+    if (
+      evt.key === "Escape" &&
+      this.popupElement.classList.contains("popup_active")
+    ) {
+        
+      this.close();
     }
-    _handleEscClose(){
-        document.addEventListener("keydown", escapeKey);
-        // if (evt.key === "Escape") {
-        //     const openedPopup = document.querySelector(".popup_active");
-        //     openedPopup ? closePopup(openedPopup) : null;
-        //   }
-    }
-    setEventListeners(){
-        const closeButton = document.querySelector(".popup__exit-btn");
-        closeButton.addEventlistener("click", () => { this.close() });
-        shadedArea.addEventlistener("click", () => { this.close() });
-    }
+  }
+
+  setEventListeners() {
+    document.addEventListener("keydown", this._handleEscClose);
+    const popupCloseButton = this.popupElement.querySelector(".popup__exit-btn");
+    this.popupElement.addEventListener("click", this.close);
+    popupCloseButton.addEventListener("click", this.close);
+  }
 }

@@ -1,11 +1,13 @@
-// import { openPopup, closePopup } from "../components/utils.js";
+
 import { initialCards } from "../components/cardsList.js";
 import Card from "../components/Card.js";
+import Popup from "../components/Popup.js";
 import Section from "../components/Section.js";
-// import FormValidator from "../components/FormValidator.js.js";
-const cardListSelector = ".elements__list";
- //const cardsElementsList = document.querySelector(".elements__list");
 
+const cardListSelector = ".elements__list";
+
+// import FormValidator from "../components/FormValidator.js.js";
+ //const cardsElementsList = document.querySelector(".elements__list");
 // const editProfileForm = document.querySelector("#editProfileForm");
 // const createNewPlaceForm = document.querySelector("#createNewPlaceForm");
 // const profileEditBtn = document.querySelector(".profile__edit-btn");
@@ -18,7 +20,7 @@ const cardListSelector = ".elements__list";
 // const addImagePopUp = document.querySelector("#addImage");
 // const inputTitle = createNewPlaceForm.querySelector("#inputTitle");
 // const inputLink = createNewPlaceForm.querySelector("#inputLink");
-// const popupList = document.querySelectorAll(".popup");
+ const popupList = document.querySelectorAll(".popup");
 
 // const settings = {
 //   inputSelector: ".popup__form-input",
@@ -85,13 +87,19 @@ const cardListSelector = ".elements__list";
 //   inputLink.value = "";
 // }
 
-// profileEditBtn.addEventListener("click", openProfileForm);
+
 // profileAddBtn.addEventListener("click", openAddImageForm);
 // editProfileForm.addEventListener("submit", submitProfileForm);
 // createNewPlaceForm.addEventListener("submit", submitNewPlaceForm);
 
 
 //////////////////////////////////
+[...popupList].forEach((popup) => {
+  const popupItem = new Popup(popup.id);
+  popupItem.setEventListeners();
+})
+
+
 
 const cardsList = new Section({
     data: initialCards,

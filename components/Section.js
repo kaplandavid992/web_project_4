@@ -1,4 +1,3 @@
-
 export default class Section {
     constructor({data, renderer}, containerSelector) {
         this._container = document.querySelector(containerSelector);
