@@ -1,16 +1,17 @@
 class UserInfo {
-    constructor({data}){
-        this.name = data.name;
-        this.role = data.role;
+    constructor({name, role}){
+        this._name = name;
+        this._role = role;
     }
 
     getUserInfo(){
-        returns an object with information about the user. 
-        This method will be handy for cases when 
-        it's necessary to display the user data in the open form.
+        const userData = {};
+        userData.name = this._name;
+        userData.role = this._role;
+        return userData;
     }
 
     setUserInfo(){
-        which takes new user data and adds it on the page.
+        which takes new user data and adds it on the page.(loose couple Section in index js)
     }
 }

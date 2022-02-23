@@ -1,21 +1,36 @@
-class PopupWithForm extends Popup {
-    constructor(popupSelector, PopupWithForm => {})) {
+import Popup from "./Popup.js";
 
+export default class PopupWithForm extends Popup {
+    constructor(popupSelector, submitHandler) {
+        super(popupSelector);
+        this._formPopupElement = document.querySelector(popupSelector);
+        this._submitHandler = submitHandler;
     }
-    _getInputValues() {
-        collect all input fileds
-        return data above as an object
-    }
+    // _getInputValues() {
+
+    //     const inputFieldsList = this._formPopupElement.querySelectorAll(".popup__form-input");
+    //     inputFieldsList.forEach((input) => { 
+    //         const inputName = input.name;
+    //         const inputFields = { inputName = input.value }; 
+    //     })
+    //     return inputFields;
+    // }
+    
 
     setEventListeners(){
-        modified the parent.
-        adds a submit event handler
-        and add event listener to close icon
+        this._formPopupElement.addEventListener("submit", this._submitHandler);  
     }
 
     close(){
-        modified to reset form once popup closed
+        console.log("close");
+        // modified to reset form once popup closed
+    }
+
+    _submitHandler(){
+        this.submitHandler();
+        console.log("yes here");
     }
 }
 
-Create an instance of the PopupWithForm class for each popup
+
+//Create an instance of the PopupWithForm class for each popup

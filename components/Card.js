@@ -1,9 +1,3 @@
-
-
-// const popupImage = document.querySelector("#imagePopUp");
-// const imageFile = popupImage.querySelector(".popup__imagePopUp");
-// const imageText = popupImage.querySelector(".popup__imagePopUp-text");
-
 export default class Card {
   constructor({text,image, handleCardClick}, templateSelector) {
     this._text = text;
@@ -56,17 +50,9 @@ export default class Card {
   }
 
   _handleCardClick() {
-    // imageFile.src = this._image;
-    // imageText.textContent = this._text;
-    // imageFile.alt = `view of ${this._text}`;
     this.handleCardClick();
   }
 }
-
-//Connect the Card class to the popup.
-// Make Card take the handleCardClick() function into 
-//the constructor. When the user clicks on the card, this
-// function will open the popup with an image.
 
 
 
