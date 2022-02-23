@@ -1,14 +1,15 @@
 
 
-const popupImage = document.querySelector("#imagePopUp");
-const imageFile = popupImage.querySelector(".popup__imagePopUp");
-const imageText = popupImage.querySelector(".popup__imagePopUp-text");
+// const popupImage = document.querySelector("#imagePopUp");
+// const imageFile = popupImage.querySelector(".popup__imagePopUp");
+// const imageText = popupImage.querySelector(".popup__imagePopUp-text");
 
 export default class Card {
-  constructor(data, templateSelector) {
-    this._text = data.text;
-    this._image = data.image;
+  constructor({text,image, handleCardClick}, templateSelector) {
+    this._text = text;
+    this._image = image;
     this._templateSelector = templateSelector;
+    this._handleCardClick = handleCardClick;
   }
 
   _getTemplate() {
@@ -33,7 +34,7 @@ export default class Card {
     const elementLikeBtn = this._element.querySelector(".elements__like-btn");
     const deleteTrashBtn = this._element.querySelector(".elements__delete-icon");
     imageCard.addEventListener("click", () => {
-      this._handleImagePopup();
+      this._handleCardClick();
     });
 
     elementLikeBtn.addEventListener("click", () => {
@@ -54,11 +55,11 @@ export default class Card {
     .classList.toggle("elements__svg-heart_liked");
   }
 
-  _handleImagePopup() {
-    imageFile.src = this._image;
-    imageText.textContent = this._text;
-    imageFile.alt = `view of ${this._text}`;
-    // openPopup(popupImage);
+  _handleCardClick() {
+    // imageFile.src = this._image;
+    // imageText.textContent = this._text;
+    // imageFile.alt = `view of ${this._text}`;
+    this.handleCardClick();
   }
 }
 

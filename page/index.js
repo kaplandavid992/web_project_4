@@ -2,6 +2,7 @@
 import { initialCards } from "../components/cardsList.js";
 import Card from "../components/Card.js";
 import Popup from "../components/Popup.js";
+import PopupWithImage from "../components/PopupWithImage.js";
 import Section from "../components/Section.js";
 
 const cardListSelector = ".elements__list";
@@ -94,18 +95,21 @@ const cardListSelector = ".elements__list";
 
 
 //////////////////////////////////
+
+
 [...popupList].forEach((popup) => {
-  const popupItem = new Popup(popup.id);
+  const popupItem = new Popup("."+popup.className);
   popupItem.setEventListeners();
 })
-
-
 
 const cardsList = new Section({
     data: initialCards,
     renderer: (item) => {
-      const card = new Card({text:item.name, image: item.link },
-                              "#card-template");
+      const card = new Card({text:item.name, image: item.link, handleCardClick(){
+        const imagePopup = new PopupWithImage({imagePopupSelector:"#imagePopUp", image:item.link, text:item.name});
+        imagePopup.generateImagePopup();
+        
+      } },"#card-template");
       const cardElement = card.generateCard();
       cardsList.addItem(cardElement);
     }

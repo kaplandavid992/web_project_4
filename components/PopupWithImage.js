@@ -1,15 +1,22 @@
-class PopupWithImage extends Popup {
-    constructor(){
-        super(open)
-    }
+import Popup from "./Popup.js";
 
-    imageFile.src = this._image;
-    imageText.textContent = this._text;
-    imageFile.alt = `view of ${this._text}`;
-    openPopup(popupImage);
+export default class PopupWithImage extends Popup {
+    constructor({ imagePopupSelector, image, text }){
+        super(imagePopupSelector);
+        this._image = image;
+        this._text = text;
+        this._popupImage = document.querySelector(imagePopupSelector);
+        this._imageFile = this._popupImage.querySelector(".popup__imagePopUp");
+        this._imageText = this._popupImage.querySelector(".popup__imagePopUp-text");
+    }
+    
+    generateImagePopup = () => {    
+        this._imageFile.src = this._image;
+        this._imageText.textContent = this._text;
+        this._imageFile.alt = `view of ${this._text}`;
+        this.open();
+        this.setEventListeners();
+    }
 }
 
 
-//needs to modify open() to fit for image popup-
-other than adding _active which open already does it 
-needs to add the image and text and alt...
