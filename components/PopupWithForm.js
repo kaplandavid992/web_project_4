@@ -10,7 +10,7 @@ export default class PopupWithForm extends Popup {
     this._submitHandler = submitHandler;
   }
 
-  _getInputValues(){
+  _getInputValues() {
     const inputFields = {};
     this._inputList.forEach((input) => {
       const key = input.name;
@@ -33,4 +33,3 @@ export default class PopupWithForm extends Popup {
     this._formPopupElement.reset();
   }
 }
-

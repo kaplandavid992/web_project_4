@@ -1,27 +1,19 @@
 import { initialCards } from "../components/cardsList.js";
 import FormValidator from "../components/FormValidator.js";
+import UserInfo from "../components/UserInfo.js";
 import Card from "../components/Card.js";
 import PopupWithImage from "../components/PopupWithImage.js";
-import PopupWithForm from "../components/PopupWithForm.js"
+import PopupWithForm from "../components/PopupWithForm.js";
 import Section from "../components/Section.js";
 
-
-
 const cardsElementsList = document.querySelector(".elements__list");
-// const editProfileForm = document.querySelector("#editProfileForm");
-// const createNewPlaceForm = document.querySelector("#createNewPlaceForm");
 const cardListSelector = ".elements__list";
- const profileName = document.querySelector(".profile__name");
- const profileRole = document.querySelector(".profile__role");
-// const profilePopUp = document.querySelector("#editProfile");
-// const inputName = editProfileForm.querySelector("#inputName");
-// const inputRole = editProfileForm.querySelector("#inputRole");
-// const addImagePopUp = document.querySelector("#addImage");
-// const inputTitle = createNewPlaceForm.querySelector("#inputTitle");
-// const inputLink = createNewPlaceForm.querySelector("#inputLink");
-const popupList = document.querySelectorAll(".popup");
-
-
+const profileEditBtn = document.querySelector(".profile__edit-btn");
+const profileAddBtn = document.querySelector(".profile__add-btn");
+const inputName = document.querySelector("#inputName");
+const inputRole = document.querySelector("#inputRole");
+const profileFormValidator = new FormValidator(settings, editProfileForm);
+const newPlaceformValidator = new FormValidator(settings, createNewPlaceForm);
 
 const settings = {
   inputSelector: ".popup__form-input",
@@ -31,36 +23,15 @@ const settings = {
   errorClass: "popup__form-errorMsg_active",
 };
 
-const profileFormValidator = new FormValidator(settings, editProfileForm);
 profileFormValidator.enableValidation();
-const newPlaceformValidator = new FormValidator(settings, createNewPlaceForm);
 newPlaceformValidator.enableValidation();
 
-
-
-// function openProfileForm() {
-//   openPopup(profilePopUp);
-//   inputName.value = profileName.textContent;
-//   inputRole.value = profileRole.textContent;
-//   profileFormValidator.resetValidation();
-// }
-
-// function openAddImageForm() {
-//   openPopup(addImagePopUp);
-// }
-
-// editProfileForm.addEventListener("submit", submitProfileForm);
-// createNewPlaceForm.addEventListener("submit", submitNewPlaceForm);
-
-//////////////////////////////////
-
-const profileEditBtn = document.querySelector(".profile__edit-btn");
-const profileAddBtn = document.querySelector(".profile__add-btn");
-
 const submitProfileHandler = () => {
-    profileName.textContent = inputName.value;
-    profileRole.textContent = inputRole.value;
-}
+  const name = inputName.value;
+  const role = inputRole.value;
+  const profileUserInfo = new UserInfo({ name, role });
+  profileUserInfo.setUserInfo();
+};
 
 const submitAddHandler = () => {
   const card = new Card(
@@ -71,22 +42,19 @@ const submitAddHandler = () => {
   cardsElementsList.prepend(cardElement);
   inputTitle.value = "";
   inputLink.value = "";
-}
+};
 
-
-profileEditBtn.addEventListener("click", () => { 
+profileEditBtn.addEventListener("click", () => {
   const editPopup = new PopupWithForm("#editProfile", submitProfileHandler);
   editPopup.open();
   editPopup.setEventListeners();
- })
+});
 
-profileAddBtn.addEventListener("click", () => { 
+profileAddBtn.addEventListener("click", () => {
   const addPopup = new PopupWithForm("#addImage", submitAddHandler);
   addPopup.open();
   addPopup.setEventListeners();
 });
-
-
 
 const cardsList = new Section(
   {
