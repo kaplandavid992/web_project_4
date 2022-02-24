@@ -3,11 +3,11 @@ export default class Popup {
     this.popupElement = document.querySelector(popupSelector);
   }
 
-  open = () => {
+  open(){
     this.popupElement.classList.add("popup_active");
   };
 
-  close = () => {
+  close(){
     this.popupElement.classList.remove("popup_active");
   };
 
