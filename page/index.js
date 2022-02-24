@@ -12,9 +12,6 @@ const profileEditBtn = document.querySelector(".profile__edit-btn");
 const profileAddBtn = document.querySelector(".profile__add-btn");
 const inputName = document.querySelector("#inputName");
 const inputRole = document.querySelector("#inputRole");
-const profileFormValidator = new FormValidator(settings, editProfileForm);
-const newPlaceformValidator = new FormValidator(settings, createNewPlaceForm);
-
 const settings = {
   inputSelector: ".popup__form-input",
   submitButtonSelector: ".popup__form-submit-btn",
@@ -22,6 +19,8 @@ const settings = {
   inputErrorClass: "popup__form-errorMsg",
   errorClass: "popup__form-errorMsg_active",
 };
+const profileFormValidator = new FormValidator(settings, editProfileForm);
+const newPlaceformValidator = new FormValidator(settings, createNewPlaceForm);
 
 profileFormValidator.enableValidation();
 newPlaceformValidator.enableValidation();
