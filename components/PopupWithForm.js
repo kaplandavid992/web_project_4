@@ -1,36 +1,37 @@
 import Popup from "./Popup.js";
 
 export default class PopupWithForm extends Popup {
-    constructor(popupSelector, submitHandler) {
-        super(popupSelector);
-        this._formPopupElement = document.querySelector(popupSelector);
-        this._submitHandler = submitHandler;
-    }
-    // _getInputValues() {
+  constructor(popupSelector, submitHandler) {
+    super(popupSelector);
+    this._popupElement = document.querySelector(popupSelector);
+    this._formPopupElement = this._popupElement.querySelector(".popup__form");
+    this._inputList =
+      this._formPopupElement.querySelectorAll(".popup__form-input");
+    this._submitHandler = submitHandler;
+  }
 
-    //     const inputFieldsList = this._formPopupElement.querySelectorAll(".popup__form-input");
-    //     inputFieldsList.forEach((input) => { 
-    //         const inputName = input.name;
-    //         const inputFields = { inputName = input.value }; 
-    //     })
-    //     return inputFields;
-    // }
-    
+  _getInputValues(){
+    const inputFields = {};
+    this._inputList.forEach((input) => {
+      const key = input.name;
+      inputFields[key] = input.value;
+    });
+    return inputFields;
+  }
 
-    setEventListeners(){
-        this._formPopupElement.addEventListener("submit", this._submitHandler);  
-    }
+  setEventListeners() {
+    super.setEventListeners();
+    this._formPopupElement.addEventListener("submit", (e) => {
+      e.preventDefault();
+      this._submitHandler();
+      this.close();
+    });
+  }
 
-    close(){
-        console.log("close");
-        // modified to reset form once popup closed
-    }
-
-    _submitHandler(){
-        this.submitHandler();
-        console.log("yes here");
-    }
+  close() {
+    console.log("close");
+    // this.super.close();
+    // modified to reset form once popup closed
+  }
 }
 
-
-//Create an instance of the PopupWithForm class for each popup

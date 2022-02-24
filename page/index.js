@@ -1,17 +1,16 @@
 import { initialCards } from "../components/cardsList.js";
+import FormValidator from "../components/FormValidator.js";
 import Card from "../components/Card.js";
-import Popup from "../components/Popup.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import PopupWithForm from "../components/PopupWithForm.js"
 import Section from "../components/Section.js";
 
-const cardListSelector = ".elements__list";
 
-// import FormValidator from "../components/FormValidator.js.js";
-//const cardsElementsList = document.querySelector(".elements__list");
+
+const cardsElementsList = document.querySelector(".elements__list");
 // const editProfileForm = document.querySelector("#editProfileForm");
 // const createNewPlaceForm = document.querySelector("#createNewPlaceForm");
-
+const cardListSelector = ".elements__list";
  const profileName = document.querySelector(".profile__name");
  const profileRole = document.querySelector(".profile__role");
 // const profilePopUp = document.querySelector("#editProfile");
@@ -24,18 +23,18 @@ const popupList = document.querySelectorAll(".popup");
 
 
 
-// const settings = {
-//   inputSelector: ".popup__form-input",
-//   submitButtonSelector: ".popup__form-submit-btn",
-//   inactiveButtonClass: "popup__form-submit-btn_inactive",
-//   inputErrorClass: "popup__form-errorMsg",
-//   errorClass: "popup__form-errorMsg_active",
-// };
+const settings = {
+  inputSelector: ".popup__form-input",
+  submitButtonSelector: ".popup__form-submit-btn",
+  inactiveButtonClass: "popup__form-submit-btn_inactive",
+  inputErrorClass: "popup__form-errorMsg",
+  errorClass: "popup__form-errorMsg_active",
+};
 
-// const profileFormValidator = new FormValidator(settings, editProfileForm);
-// profileFormValidator.enableValidation();
-// const newPlaceformValidator = new FormValidator(settings, createNewPlaceForm);
-// newPlaceformValidator.enableValidation();
+const profileFormValidator = new FormValidator(settings, editProfileForm);
+profileFormValidator.enableValidation();
+const newPlaceformValidator = new FormValidator(settings, createNewPlaceForm);
+newPlaceformValidator.enableValidation();
 
 
 
@@ -50,27 +49,6 @@ const popupList = document.querySelectorAll(".popup");
 //   openPopup(addImagePopUp);
 // }
 
-// function submitProfileHandler(e) {
-//   e.preventDefault();
-//   profileName.textContent = inputName.value;
-//   profileRole.textContent = inputRole.value;
-//   closePopup(profilePopUp);
-// }
-
-// function submitNewPlaceHandler(e) {
-//   e.preventDefault();
-//   const card = new Card(
-//     { text: inputTitle.value, image: inputLink.value },
-//     "#card-template"
-//   );
-//   const cardElement = card.generateCard();
-//   cardsElementsList.prepend(cardElement);
-//   closePopup(addImagePopUp);
-//   inputTitle.value = "";
-//   inputLink.value = "";
-// }
-
-
 // editProfileForm.addEventListener("submit", submitProfileForm);
 // createNewPlaceForm.addEventListener("submit", submitNewPlaceForm);
 
@@ -79,26 +57,35 @@ const popupList = document.querySelectorAll(".popup");
 const profileEditBtn = document.querySelector(".profile__edit-btn");
 const profileAddBtn = document.querySelector(".profile__add-btn");
 
-
-profileEditBtn.addEventListener("click", () => { 
-  const editPopup = new PopupWithForm("#editProfile", function submitEditHandler(e) {
-    e.preventDefault();
-    console.log("edit");
+const submitProfileHandler = () => {
     profileName.textContent = inputName.value;
     profileRole.textContent = inputRole.value;
-    editPopup.close();
-  });
+}
+
+const submitAddHandler = () => {
+  const card = new Card(
+    { text: inputTitle.value, image: inputLink.value },
+    "#card-template"
+  );
+  const cardElement = card.generateCard();
+  cardsElementsList.prepend(cardElement);
+  inputTitle.value = "";
+  inputLink.value = "";
+}
+
+
+profileEditBtn.addEventListener("click", () => { 
+  const editPopup = new PopupWithForm("#editProfile", submitProfileHandler);
   editPopup.open();
   editPopup.setEventListeners();
  })
 
 profileAddBtn.addEventListener("click", () => { 
-  const addPopup = new PopupWithForm("#addImage", function submitAddHandler() {
-    console.log("add");
-  });
+  const addPopup = new PopupWithForm("#addImage", submitAddHandler);
   addPopup.open();
   addPopup.setEventListeners();
 });
+
 
 
 const cardsList = new Section(
