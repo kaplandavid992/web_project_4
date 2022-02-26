@@ -1,3 +1,4 @@
+import "./index.css";
 import { initialCards } from "../components/cardsList.js";
 import FormValidator from "../components/FormValidator.js";
 import UserInfo from "../components/UserInfo.js";
@@ -39,8 +40,8 @@ const submitAddHandler = () => {
   );
   const cardElement = card.generateCard();
   cardsElementsList.prepend(cardElement);
-  inputTitle.value = "";
-  inputLink.value = "";
+  inputTitle.setAttribute("value", "");
+  inputLink.setAttribute("value", "");
 };
 
 profileEditBtn.addEventListener("click", () => {
