@@ -49,9 +49,6 @@ export default class Card {
     .classList.toggle("elements__svg-heart_liked");
   }
 
-  _handleCardClick() {
-    this.handleCardClick();
-  }
 }
 
 

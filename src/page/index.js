@@ -1,5 +1,5 @@
 import "./index.css";
-import { initialCards } from "../components/cardsList.js";
+import { initialCards } from "../utils/cardsList.js";
 import FormValidator from "../components/FormValidator.js";
 import UserInfo from "../components/UserInfo.js";
 import Card from "../components/Card.js";
@@ -7,12 +7,11 @@ import PopupWithImage from "../components/PopupWithImage.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 import Section from "../components/Section.js";
 
-const cardsElementsList = document.querySelector(".elements__list");
 const cardListSelector = ".elements__list";
+const cardsElementsList = document.querySelector(cardListSelector);
 const profileEditBtn = document.querySelector(".profile__edit-btn");
 const profileAddBtn = document.querySelector(".profile__add-btn");
-const inputName = document.querySelector("#inputName");
-const inputRole = document.querySelector("#inputRole");
+
 const settings = {
   inputSelector: ".popup__form-input",
   submitButtonSelector: ".popup__form-submit-btn",
@@ -26,23 +25,35 @@ const newPlaceformValidator = new FormValidator(settings, createNewPlaceForm);
 profileFormValidator.enableValidation();
 newPlaceformValidator.enableValidation();
 
-const submitProfileHandler = () => {
-  const name = inputName.value;
-  const role = inputRole.value;
+function submitProfileHandler() {
+  const inputFields = this._getInputValues();
+  const name = inputFields.form__name;
+  const role = inputFields.form__role;
   const profileUserInfo = new UserInfo({ name, role });
   profileUserInfo.setUserInfo();
 };
 
-const submitAddHandler = () => {
+function submitAddHandler(){
+  const inputFields = this._getInputValues();
   const card = new Card(
-    { text: inputTitle.value, image: inputLink.value },
+    {
+      text: inputFields.form__title,
+      image: inputFields.form__imageLink,
+      handleCardClick() {
+        const imagePopup = new PopupWithImage({
+          imagePopupSelector: "#imagePopUp",
+          image: inputFields.form__imageLink,
+          text: inputFields.form__title,
+        });
+        imagePopup.generateImagePopup();
+      },
+    },
     "#card-template"
   );
   const cardElement = card.generateCard();
   cardsElementsList.prepend(cardElement);
-  inputTitle.setAttribute("value", "");
-  inputLink.setAttribute("value", "");
-};
+  newPlaceformValidator.resetValidation();
+}
 
 profileEditBtn.addEventListener("click", () => {
   const editPopup = new PopupWithForm("#editProfile", submitProfileHandler);
@@ -71,7 +82,6 @@ const cardsList = new Section(
               text: item.name,
             });
             imagePopup.generateImagePopup();
-            imagePopup.setEventListeners();
           },
         },
         "#card-template"
