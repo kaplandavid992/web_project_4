@@ -11,6 +11,7 @@ const cardListSelector = ".elements__list";
 const cardsElementsList = document.querySelector(cardListSelector);
 const profileEditBtn = document.querySelector(".profile__edit-btn");
 const profileAddBtn = document.querySelector(".profile__add-btn");
+const imagePopupSelector = "#imagePopUp";
 
 const settings = {
   inputSelector: ".popup__form-input",
@@ -19,6 +20,7 @@ const settings = {
   inputErrorClass: "popup__form-errorMsg",
   errorClass: "popup__form-errorMsg_active",
 };
+
 const profileFormValidator = new FormValidator(settings, editProfileForm);
 const newPlaceformValidator = new FormValidator(settings, createNewPlaceForm);
 
@@ -31,26 +33,28 @@ function submitProfileHandler() {
   const role = inputFields.form__role;
   const profileUserInfo = new UserInfo({ name, role });
   profileUserInfo.setUserInfo();
-};
+}
 
-function submitAddHandler(){
-  const inputFields = this._getInputValues();
+function handleCardClick(image, text) {
+  const imagePopup = new PopupWithImage({ imagePopupSelector, image, text });
+  imagePopup.generateImagePopup();
+}
+
+function setCardInstance(text, image) {
   const card = new Card(
-    {
-      text: inputFields.form__title,
-      image: inputFields.form__imageLink,
-      handleCardClick() {
-        const imagePopup = new PopupWithImage({
-          imagePopupSelector: "#imagePopUp",
-          image: inputFields.form__imageLink,
-          text: inputFields.form__title,
-        });
-        imagePopup.generateImagePopup();
-      },
-    },
+    { text, image, handleCardClick: handleCardClick.bind(this, image, text) },
     "#card-template"
   );
   const cardElement = card.generateCard();
+  card._setEventListeners();
+  return cardElement;
+}
+
+function submitAddHandler() {
+  const inputFields = this._getInputValues();
+  const text = inputFields.form__title;
+  const image = inputFields.form__imageLink;
+  const cardElement = setCardInstance(text, image);
   cardsElementsList.prepend(cardElement);
   newPlaceformValidator.resetValidation();
 }
@@ -71,22 +75,9 @@ const cardsList = new Section(
   {
     data: initialCards,
     renderer: (item) => {
-      const card = new Card(
-        {
-          text: item.name,
-          image: item.link,
-          handleCardClick() {
-            const imagePopup = new PopupWithImage({
-              imagePopupSelector: "#imagePopUp",
-              image: item.link,
-              text: item.name,
-            });
-            imagePopup.generateImagePopup();
-          },
-        },
-        "#card-template"
-      );
-      const cardElement = card.generateCard();
+      const text = item.name;
+      const image = item.link;
+      const cardElement = setCardInstance(text, image);
       cardsList.addItem(cardElement);
     },
   },
