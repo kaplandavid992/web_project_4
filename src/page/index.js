@@ -38,6 +38,7 @@ function submitProfileHandler() {
 function handleCardClick(image, text) {
   const imagePopup = new PopupWithImage({ imagePopupSelector, image, text });
   imagePopup.generateImagePopup();
+  imagePopup.setEventListeners();
 }
 
 function setCardInstance(text, image) {

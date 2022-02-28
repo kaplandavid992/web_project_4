@@ -15,6 +15,5 @@ export default class PopupWithImage extends Popup {
     this._imageText.textContent = this._text;
     this._imageFile.alt = `view of ${this._text}`;
     this.open();
-    this.setEventListeners();
   };
 }

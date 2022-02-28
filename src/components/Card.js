@@ -23,11 +23,9 @@ export default class Card {
   }
 
   _setEventListeners() {
-    
     const imageCard = this._element.querySelector(".elements__image");
     const elementLikeBtn = this._element.querySelector(".elements__like-btn");
     const deleteTrashBtn = this._element.querySelector(".elements__delete-icon");
-    
     imageCard.addEventListener("click", () => {
       this._handleCardClick();
     });
@@ -41,7 +39,7 @@ export default class Card {
     })
   }
 
-
+  
   _handleDeleteCard() {
     this._element.remove();
   }
