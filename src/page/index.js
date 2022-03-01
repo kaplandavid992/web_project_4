@@ -7,11 +7,15 @@ import PopupWithImage from "../components/PopupWithImage.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 import Section from "../components/Section.js";
 
+const imagePopupSelector = "#imagePopUp";
 const cardListSelector = ".elements__list";
+const name = ".profile__name";
+const role = ".profile__role";
 const cardsElementsList = document.querySelector(cardListSelector);
 const profileEditBtn = document.querySelector(".profile__edit-btn");
 const profileAddBtn = document.querySelector(".profile__add-btn");
-const imagePopupSelector = "#imagePopUp";
+const inputName = document.querySelector("#inputName");
+const inputRole = document.querySelector("#inputRole");
 
 const settings = {
   inputSelector: ".popup__form-input",
@@ -23,17 +27,14 @@ const settings = {
 
 const profileFormValidator = new FormValidator(settings, editProfileForm);
 const newPlaceformValidator = new FormValidator(settings, createNewPlaceForm);
+const addPopup = new PopupWithForm("#addImage", submitAddHandler);
+const editPopup = new PopupWithForm("#editProfile", submitProfileHandler);
+const profileUserInfo = new UserInfo({name, role});
 
+editPopup.setEventListeners();
+addPopup.setEventListeners();
 profileFormValidator.enableValidation();
 newPlaceformValidator.enableValidation();
-
-function submitProfileHandler() {
-  const inputFields = this._getInputValues();
-  const name = inputFields.form__name;
-  const role = inputFields.form__role;
-  const profileUserInfo = new UserInfo({ name, role });
-  profileUserInfo.setUserInfo();
-}
 
 function handleCardClick(image, text) {
   const imagePopup = new PopupWithImage({ imagePopupSelector, image, text });
@@ -51,6 +52,10 @@ function setCardInstance(text, image) {
   return cardElement;
 }
 
+function submitProfileHandler() {
+  profileUserInfo.setUserInfo();
+}
+
 function submitAddHandler() {
   const inputFields = this._getInputValues();
   const text = inputFields.form__title;
@@ -61,15 +66,14 @@ function submitAddHandler() {
 }
 
 profileEditBtn.addEventListener("click", () => {
-  const editPopup = new PopupWithForm("#editProfile", submitProfileHandler);
+  const currentUserInfo = profileUserInfo.getUserInfo();
+  inputName.setAttribute("value", currentUserInfo.name);
+  inputRole.setAttribute("value", currentUserInfo.role);
   editPopup.open();
-  editPopup.setEventListeners();
 });
 
 profileAddBtn.addEventListener("click", () => {
-  const addPopup = new PopupWithForm("#addImage", submitAddHandler);
   addPopup.open();
-  addPopup.setEventListeners();
 });
 
 const cardsList = new Section(
