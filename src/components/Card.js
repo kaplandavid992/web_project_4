@@ -4,6 +4,11 @@ export default class Card {
     this._image = image;
     this._templateSelector = templateSelector;
     this._handleCardClick = handleCardClick;
+    this._element = this._getTemplate();
+    this._imageItem = this._element.querySelector(".elements__image");
+    this._textItem = this._element.querySelector(".elements__text");
+    this._likeItem = this._element.querySelector(".elements__like-btn");
+    this._deleteItem = this._element.querySelector(".elements__delete-icon");
   }
 
   _getTemplate() {
@@ -15,17 +20,17 @@ export default class Card {
   }
 
   generateCard() {
-    this._element = this._getTemplate();
-    this._element.querySelector(".elements__image").src = this._image;
-    this._element.querySelector(".elements__text").textContent = this._text;
-    this._element.querySelector(".elements__image").alt = `view of ${this._text}`;
+    this._imageItem.src = this._image;
+    this._textItem.textContent = this._text;
+    this._imageItem.alt = `view of ${this._text}`;
     return this._element;
   }
 
-  _setEventListeners() {
-    const imageCard = this._element.querySelector(".elements__image");
-    const elementLikeBtn = this._element.querySelector(".elements__like-btn");
-    const deleteTrashBtn = this._element.querySelector(".elements__delete-icon");
+  setEventListeners() {
+    const imageCard = this._imageItem;
+    const elementLikeBtn = this._likeItem;
+    const deleteTrashBtn = this._deleteItem;
+
     imageCard.addEventListener("click", () => {
       this._handleCardClick();
     });
@@ -39,13 +44,12 @@ export default class Card {
     })
   }
 
-  
   _handleDeleteCard() {
     this._element.remove();
   }
 
   _handleLikeToggle() {
-    this._element.querySelector(".elements__like-btn")
+    this._likeItem
     .classList.toggle("elements__svg-heart_liked");
   }
 
