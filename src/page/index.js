@@ -4,10 +4,8 @@ import UserInfo from "../components/UserInfo.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 import {
   settings,
-  inputRole,
   nameSelector,
   roleSelector,
-  inputName,
   profileAddBtn,
   profileEditBtn,
   cardsElementsList,
