@@ -4,10 +4,8 @@ import UserInfo from "../components/UserInfo.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 import {
   settings,
-  inputRole,
   nameSelector,
   roleSelector,
-  inputName,
   profileAddBtn,
   profileEditBtn,
   cardsElementsList,
@@ -22,21 +20,21 @@ import Section from "../components/Section.js";
 const profileFormValidator = new FormValidator(settings, editProfileForm);
 const newPlaceformValidator = new FormValidator(settings, createNewPlaceForm);
 const addPopup = new PopupWithForm("#addImage", submitAddHandler);
-const editPopup = new PopupWithForm("#editProfile", submitProfileHandler);
-const profileUserInfo = new UserInfo({ nameSelector, roleSelector });
+const editPopup = new PopupWithForm("#editProfile", ()=>{ submitProfileHandler(data)} );
+const profileUserInfo = new UserInfo({nameSelector, roleSelector});
+
 editPopup.setEventListeners();
 addPopup.setEventListeners();
 profileFormValidator.enableValidation();
 newPlaceformValidator.enableValidation();
 
-function handleCardClick(imagePopup) {
-  imagePopup.generateImagePopup();
-  imagePopup.open();
-}
+
 
 function setCardInstance(text, image) {
-  const imagePopup = new PopupWithImage({ imagePopupSelector, image, text });
-  
+  const handleCardClick = (imagePopup) => {
+    imagePopup.open(image,text);
+  }
+  const imagePopup = new PopupWithImage(imagePopupSelector);
   imagePopup.setEventListeners();
   const card = new Card(
     {
@@ -54,8 +52,8 @@ function setCardInstance(text, image) {
   return cardElement;
 }
 
-function submitProfileHandler() {
-  profileUserInfo.setUserInfo();
+function submitProfileHandler(data) {
+  profileUserInfo.setUserInfo(data);
 }
 
 function submitAddHandler() {
@@ -63,15 +61,13 @@ function submitAddHandler() {
   const text = inputFields.form__title;
   const image = inputFields.form__imageLink;
   const cardElement = setCardInstance(text, image);
-  cardsElementsList.prepend(cardElement);
+  cardsElementsList.prepend(cardElement); // need to be done with Section
   newPlaceformValidator.resetValidation();
 }
 
 profileEditBtn.addEventListener("click", () => {
   const currentUserInfo = profileUserInfo.getUserInfo();
-  const inputFields = editPopup.getInputValues()
-  inputFields.form__name.setAttribute("value", currentUserInfo.name);
-  inputFields.form__role.setAttribute("value", currentUserInfo.role);
+  
   editPopup.open();
 });
 
