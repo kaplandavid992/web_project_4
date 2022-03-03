@@ -57,65 +57,6 @@ const cardRenderer = (item) => {
   const cardElement = card.generateCard();
   return cardElement;
 };
-// function setCardInstance(text, image) {
-//   const handleCardClick = (imagePopup) => {
-//     imagePopup.open(image,text);
-//   }
-//   const imagePopup = new PopupWithImage(imagePopupSelector);
-//   imagePopup.setEventListeners();
-//   const card = new Card(
-//     {
-//       text,
-//       image,
-//       handleCardClick: () => {
-//         handleCardClick(imagePopup);
-//       },
-//     },
-//     "#card-template"
-//   );
-//   const cardElement = card.generateCard();
-//   return cardElement;
-// }
-
-function handleProfileFormSubmit() {
-  const inputFields = editPopup.getInputValues();
-  profileUserInfo.setUserInfo(inputFields);
-}
-
-function handleCardFormSubmit() {
-  const inputFields = addPopup.getInputValues();
-  const text = inputFields.form__title;
-  const image = inputFields.form__imageLink;
-  const items = [];
-  const item = {};
-  item.name = text;
-  item.link = image;
-  items.push(item);
-
-  const cardsList = new Section(
-    {
-      data: items,
-      renderer: (item) => {
-        cardsList.addItem(cardRenderer(item));
-      },
-    },
-    cardListSelector
-  );
-  cardsList.renderer();
-  formValidators["add__form"].resetValidation();
-}
-
-profileEditBtn.addEventListener("click", () => {
-  const currentUserProfile = profileUserInfo.getUserInfo();
-  inputName.setAttribute("value", currentUserProfile.name);
-  inputRole.setAttribute("value", currentUserProfile.role);
-  editPopup.open();
-});
-
-profileAddBtn.addEventListener("click", () => {
-  formValidators["edit__form"].resetValidation();
-  addPopup.open();
-});
 
 const cardsList = new Section(
   {
@@ -126,5 +67,32 @@ const cardsList = new Section(
   },
   cardListSelector
 );
-
 cardsList.renderer();
+
+function handleProfileFormSubmit() {
+  const inputFields = editPopup.getInputValues();
+  profileUserInfo.setUserInfo(inputFields);
+}
+
+function handleCardFormSubmit() {
+  const inputFields = addPopup.getInputValues();
+  const text = inputFields.form__title;
+  const image = inputFields.form__imageLink;
+  const item = {};
+  item.name = text;
+  item.link = image;
+  cardsList.addItem(cardRenderer(item));
+}
+
+profileEditBtn.addEventListener("click", () => {
+  const currentUserProfile = profileUserInfo.getUserInfo();
+  inputName.setAttribute("value", currentUserProfile.name);
+  inputRole.setAttribute("value", currentUserProfile.role);
+  formValidators["edit__form"].resetValidation();
+  editPopup.open();
+});
+
+profileAddBtn.addEventListener("click", () => {
+  formValidators["add__form"].resetValidation();
+  addPopup.open();
+});
