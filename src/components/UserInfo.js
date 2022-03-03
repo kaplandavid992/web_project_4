@@ -1,11 +1,9 @@
 export default class UserInfo {
-  constructor({ name, role }) {
-    this._nameSelector = name;
-    this._roleSelector = role;
+  constructor({ nameSelector, roleSelector }) {
+    this._nameSelector = nameSelector;
+    this._roleSelector = roleSelector;
     this._profileName = document.querySelector(this._nameSelector);
     this._profileRole = document.querySelector(this._roleSelector);
-    this._inputName = document.querySelector("#inputName");
-    this._inputRole = document.querySelector("#inputRole");
   }
 
   getUserInfo() {
@@ -15,10 +13,8 @@ export default class UserInfo {
     return userData;
   }
 
-  setUserInfo() {
-    this._inputName.setAttribute("value", this._nameSelector.value);
-    this._inputRole.setAttribute("value", this._roleSelector.value);
-    this._profileName.textContent = this._inputName.value;
-    this._profileRole.textContent = this._inputRole.value;
+  setUserInfo(data) {
+    this._profileName.textContent = data.form__name;
+    this._profileRole.textContent = data.form__role;
   }
 }

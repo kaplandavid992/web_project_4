@@ -3,35 +3,30 @@ export default class Popup {
     this._popupElement = document.querySelector(popupSelector);
   }
 
-  open(){
+  open() {
     this._popupElement.classList.add("popup_active");
     document.addEventListener("keydown", this._handleEscClose);
-  };
+  }
 
-  close(){
-    this._popupElement.classList.remove("popup_active"); 
-  };
+  close() {
+    this._popupElement.classList.remove("popup_active");
+  }
 
   _handleEscClose = (evt) => {
-    if (
-      evt.key === "Escape" &&
-      this._popupElement.classList.contains("popup_active")
-    ) {
+    if (evt.key === "Escape") {
       document.removeEventListener("keydown", this._handleEscClose);
       this.close();
     }
   };
 
-  setEventListeners(){
-    
-    this._popupElement.addEventListener("click", (e) => {
+  setEventListeners() {
+    this._popupElement.addEventListener("mousedown", (e) => {
       if (
-        e.target.classList.contains("popup_active") 
-        ||
+        e.target.classList.contains("popup_active") ||
         e.target.classList.contains("popup__exit-icon")
       ) {
         this.close();
       }
     });
-  };
+  }
 }
