@@ -1,5 +1,5 @@
 export default class Card {
-  constructor({text,image, handleCardClick}, templateSelector) {
+  constructor({ text, image, handleCardClick }, templateSelector) {
     this._text = text;
     this._image = image;
     this._templateSelector = templateSelector;
@@ -23,25 +23,22 @@ export default class Card {
     this._imageItem.src = this._image;
     this._textItem.textContent = this._text;
     this._imageItem.alt = `view of ${this._text}`;
+    this.setEventListeners();
     return this._element;
   }
 
   setEventListeners() {
-    const imageCard = this._imageItem;
-    const elementLikeBtn = this._likeItem;
-    const deleteTrashBtn = this._deleteItem;
-
-    imageCard.addEventListener("click", () => {
+    this._imageItem.addEventListener("click", () => {
       this._handleCardClick();
     });
 
-    elementLikeBtn.addEventListener("click", () => {
-        this._handleLikeToggle();
-    })
+    this._likeItem.addEventListener("click", () => {
+      this._handleLikeToggle();
+    });
 
-    deleteTrashBtn.addEventListener("click", ()=> {
-       this._handleDeleteCard();
-    })
+    this._deleteItem.addEventListener("click", () => {
+      this._handleDeleteCard();
+    });
   }
 
   _handleDeleteCard() {
@@ -49,12 +46,6 @@ export default class Card {
   }
 
   _handleLikeToggle() {
-    this._likeItem
-    .classList.toggle("elements__svg-heart_liked");
+    this._likeItem.classList.toggle("elements__svg-heart_liked");
   }
-
 }
-
-
-
-

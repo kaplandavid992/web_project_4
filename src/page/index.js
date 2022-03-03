@@ -4,6 +4,8 @@ import UserInfo from "../components/UserInfo.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 import {
   settings,
+  inputName,
+  inputRole,
   nameSelector,
   roleSelector,
   profileAddBtn,
@@ -17,24 +19,33 @@ import Card from "../components/Card.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import Section from "../components/Section.js";
 
-const profileFormValidator = new FormValidator(settings, editProfileForm);
-const newPlaceformValidator = new FormValidator(settings, createNewPlaceForm);
-const addPopup = new PopupWithForm("#addImage", submitAddHandler);
-const editPopup = new PopupWithForm("#editProfile", ()=>{ submitProfileHandler(data)} );
-const profileUserInfo = new UserInfo({nameSelector, roleSelector});
+const addPopup = new PopupWithForm("#addImage", handleCardFormSubmit);
+const editPopup = new PopupWithForm("#editProfile", handleProfileFormSubmit);
+const imagePopup = new PopupWithImage(imagePopupSelector);
+const profileUserInfo = new UserInfo({ nameSelector, roleSelector });
 
+const formValidators = {};
+const enableValidation = (settings) => {
+  const formList = Array.from(document.querySelectorAll(settings.formSelector));
+  formList.forEach((formElement) => {
+    const validator = new FormValidator(settings, formElement);
+    const formName = formElement.getAttribute("name");
+    formValidators[formName] = validator;
+    validator.enableValidation();
+  });
+};
+
+enableValidation(settings);
 editPopup.setEventListeners();
 addPopup.setEventListeners();
-profileFormValidator.enableValidation();
-newPlaceformValidator.enableValidation();
 
-
-
-function setCardInstance(text, image) {
+const cardRenderer = (item) => {
+  const text = item.name;
+  const image = item.link;
   const handleCardClick = (imagePopup) => {
-    imagePopup.open(image,text);
-  }
-  const imagePopup = new PopupWithImage(imagePopupSelector);
+    imagePopup.open(image, text);
+  };
+
   imagePopup.setEventListeners();
   const card = new Card(
     {
@@ -47,32 +58,65 @@ function setCardInstance(text, image) {
     "#card-template"
   );
   const cardElement = card.generateCard();
-  card.setEventListeners();
-
   return cardElement;
+};
+// function setCardInstance(text, image) {
+//   const handleCardClick = (imagePopup) => {
+//     imagePopup.open(image,text);
+//   }
+//   const imagePopup = new PopupWithImage(imagePopupSelector);
+//   imagePopup.setEventListeners();
+//   const card = new Card(
+//     {
+//       text,
+//       image,
+//       handleCardClick: () => {
+//         handleCardClick(imagePopup);
+//       },
+//     },
+//     "#card-template"
+//   );
+//   const cardElement = card.generateCard();
+//   return cardElement;
+// }
+
+function handleProfileFormSubmit() {
+  const inputFields = editPopup.getInputValues();
+  profileUserInfo.setUserInfo(inputFields);
 }
 
-function submitProfileHandler(data) {
-  profileUserInfo.setUserInfo(data);
-}
-
-function submitAddHandler() {
+function handleCardFormSubmit() {
   const inputFields = addPopup.getInputValues();
   const text = inputFields.form__title;
   const image = inputFields.form__imageLink;
-  const cardElement = setCardInstance(text, image);
-  cardsElementsList.prepend(cardElement); // need to be done with Section
-  newPlaceformValidator.resetValidation();
+  const items = [];
+  const item = {};
+  item.name = text;
+  item.link = image;
+  items.push(item);
+
+  const cardsList = new Section(
+    {
+      data: items,
+      renderer: (item) => {
+        cardsList.addItem(cardRenderer(item));
+      },
+    },
+    cardListSelector
+  );
+  cardsList.renderer();
+  formValidators["add__form"].resetValidation();
 }
 
 profileEditBtn.addEventListener("click", () => {
-  const currentUserInfo = profileUserInfo.getUserInfo();
-  
+  const currentUserProfile = profileUserInfo.getUserInfo();
+  inputName.setAttribute("value", currentUserProfile.name);
+  inputRole.setAttribute("value", currentUserProfile.role);
   editPopup.open();
 });
 
 profileAddBtn.addEventListener("click", () => {
-  newPlaceformValidator.resetValidation();
+  formValidators["edit__form"].resetValidation();
   addPopup.open();
 });
 
@@ -80,10 +124,7 @@ const cardsList = new Section(
   {
     data: initialCards,
     renderer: (item) => {
-      const text = item.name;
-      const image = item.link;
-      const cardElement = setCardInstance(text, image);
-      cardsList.addItem(cardElement);
+      cardsList.addItem(cardRenderer(item));
     },
   },
   cardListSelector

@@ -6,6 +6,9 @@
  const cardsElementsList = document.querySelector(cardListSelector);
  const profileEditBtn = document.querySelector(".profile__edit-btn");
  const profileAddBtn = document.querySelector(".profile__add-btn");
+ const inputName = document.querySelector("#inputName");
+ const inputRole = document.querySelector("#inputRole");
+
  
  const settings = {
   inputSelector: ".popup__form-input",
@@ -13,9 +16,10 @@
   inactiveButtonClass: "popup__form-submit-btn_inactive",
   inputErrorClass: "popup__form-errorMsg",
   errorClass: "popup__form-errorMsg_active",
+  formSelector: ".popup__form"
 };
 
- export { roleSelector, nameSelector,  
+ export { roleSelector, nameSelector, inputName, inputRole,  
      settings, cardListSelector,
       profileAddBtn, profileEditBtn, cardsElementsList, imagePopupSelector}
 
