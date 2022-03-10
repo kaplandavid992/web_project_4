@@ -6,7 +6,7 @@ Javascript methods are used for DOM element selection, manipulation and update.
 The use of Classes and this keyword, as well as modules script js files is implemented.
 Webpack bundling.
 
-//sections of designed coded??
+
 
 project is deployed at: https://kaplandavid992.github.io/web_project_4/  
 
