@@ -18,3 +18,5 @@ export default class UserInfo {
     this._profileRole.textContent = data.form__role;
   }
 }
+
+

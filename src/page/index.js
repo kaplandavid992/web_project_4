@@ -9,12 +9,25 @@ import {
   profileAddBtn,
   profileEditBtn,
   imagePopupSelector,
-  cardListSelector,
+  gallerySelector,
+  userName,
+  userRole
 } from "../utils/constants.js";
-import { initialCards } from "../utils/cardsList.js";
+
 import Card from "../components/Card.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import Section from "../components/Section.js";
+import { api } from "../components/Api.js";
+
+const gallery = new Section(
+  {
+    data: [],
+    renderer: (item) => {
+      gallery.addItem(cardRenderer(item));
+    },
+  },
+  gallerySelector
+);
 
 const addPopup = new PopupWithForm("#addImage", handleCardFormSubmit);
 const editPopup = new PopupWithForm("#editProfile", handleProfileFormSubmit);
@@ -58,20 +71,22 @@ const cardRenderer = (item) => {
   return cardElement;
 };
 
-const cardsList = new Section(
-  {
-    data: initialCards,
-    renderer: (item) => {
-      cardsList.addItem(cardRenderer(item));
-    },
-  },
-  cardListSelector
-);
-cardsList.renderer();
+api.getUserInfo().then((res) => {
+  userName.textContent = res.name;
+  userRole.textContent = res.about;
+});
+
+api.getInitialCards().then((res) => {
+  const cards = Array.from(res);
+  cards.forEach((card) => {
+    gallery.addItem(cardRenderer(card));
+  });
+});
 
 function handleProfileFormSubmit() {
   const inputFields = editPopup.getInputValues();
   profileUserInfo.setUserInfo(inputFields);
+  api.editUserInfo(inputFields);
 }
 
 function handleCardFormSubmit() {
@@ -81,7 +96,7 @@ function handleCardFormSubmit() {
   const item = {};
   item.name = text;
   item.link = image;
-  cardsList.addItem(cardRenderer(item));
+  gallery.addItem(cardRenderer(item));
 }
 
 profileEditBtn.addEventListener("click", () => {

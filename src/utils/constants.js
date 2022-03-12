@@ -1,14 +1,15 @@
 
  const imagePopupSelector = "#imagePopUp";
- const cardListSelector = ".elements__list";
+ const gallerySelector = ".elements__list";
  const nameSelector = ".profile__name";
  const roleSelector = ".profile__role";
- const cardsElementsList = document.querySelector(cardListSelector);
+ const cardsElementsList = document.querySelector(gallerySelector);
  const profileEditBtn = document.querySelector(".profile__edit-btn");
  const profileAddBtn = document.querySelector(".profile__add-btn");
  const inputName = document.querySelector("#inputName");
  const inputRole = document.querySelector("#inputRole");
-
+ const userName = document.querySelector(nameSelector);
+ const userRole = document.querySelector(roleSelector);
  
  const settings = {
   inputSelector: ".popup__form-input",
@@ -20,7 +21,7 @@
 };
 
  export { roleSelector, nameSelector, inputName, inputRole,  
-     settings, cardListSelector,
+     settings, gallerySelector, userName, userRole,
       profileAddBtn, profileEditBtn, cardsElementsList, imagePopupSelector}
 
 
