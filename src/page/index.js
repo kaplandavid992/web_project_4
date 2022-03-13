@@ -5,6 +5,7 @@ import PopupWithForm from "../components/PopupWithForm.js";
 import PopupWithSubmit from "../components/PopupWithSubmit.js";
 
 import {
+  // likesNumItem,
   settings,
   nameSelector,
   roleSelector,
@@ -13,14 +14,13 @@ import {
   imagePopupSelector,
   gallerySelector,
   userName,
-  userRole
+  userRole,
 } from "../utils/constants.js";
 
 import Card from "../components/Card.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import Section from "../components/Section.js";
 import { api } from "../components/Api.js";
-
 
 const gallery = new Section(
   {
@@ -54,13 +54,13 @@ editPopup.setEventListeners();
 addPopup.setEventListeners();
 confirmDeletePopUp.setEventListeners();
 
-
 const cardRenderer = (item) => {
   const ownerId = item.ownerId ? item.ownerId : item.owner._id;
   const text = item.name;
   const image = item.link;
-  const likesNum = item.likes ? item.likes.length : "0" ;
+  let likesNum = item.likes.length;
   const id = item._id;
+  
   const handleCardClick = (imagePopup) => {
     imagePopup.open(image, text);
   };
@@ -78,31 +78,46 @@ const cardRenderer = (item) => {
       },
       openDeleteConfirmPopUp: (id) => {
         confirmDeletePopUp.open();
-        confirmDeletePopUp.deleteAction(()=>{
-          api.confirmDelete(id).then(res =>{
+        confirmDeletePopUp.deleteAction(() => {
+          api.confirmDelete(id).then((res) => {
             card.deleteDomCard();
           });
-        })
+        });
+      },
+      handleLikeNumber: (id, updateAction) => {
+        if (updateAction === "addLike") {
+          api.addLike(id).then(
+          likesNum += 1);
+        } else {
+          api.deleteLike(id).then(res => res);
+          if (likesNum > 0) {
+            likesNum -= 1;
+          }
+        }
+        card.setLikesNum(likesNum);
       },
     },
-    "#card-template", userId
+
+    "#card-template",
+    userId
   );
   const cardElement = card.generateCard();
-  
+
   return cardElement;
 };
 
 let userId;
-Promise.all([api.getUserInfo(), api.getInitialCards()]).
-then(([resUser, resCards])=>{
-  userId = resUser._id;
-  const cards = Array.from(resCards);
-  cards.forEach((card) => {
-    gallery.addItem(cardRenderer(card));
-  });
-  userName.textContent = resUser.name;
-  userRole.textContent = resUser.about;
-}); 
+Promise.all([api.getUserInfo(), api.getInitialCards()]).then(
+  ([resUser, resCards]) => {
+    userId = resUser._id;
+    const cards = Array.from(resCards);
+    cards.forEach((card) => {
+      gallery.addItem(cardRenderer(card));
+    });
+    userName.textContent = resUser.name;
+    userRole.textContent = resUser.about;
+  }
+);
 
 function handleProfileFormSubmit() {
   const inputFields = editPopup.getInputValues();
@@ -117,9 +132,10 @@ function handleCardFormSubmit() {
   const item = {};
   item.name = text;
   item.link = image;
-  api.postNewCard(text,image).then( res => {
+  api.postNewCard(text, image).then((res) => {
     item.ownerId = res.owner._id;
     item._id = res._id;
+    item.likes = res.likes;
     gallery.addItem(cardRenderer(item));
   });
 }

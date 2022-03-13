@@ -31,6 +31,22 @@ export default class Api {
   .catch(console.log);
 }
 
+deleteLike(cardId){
+  return fetch(`${this._baseUrl}/cards/likes/${cardId}`, { 
+    method: "DELETE",
+    headers: this._headers
+}).then((res) => (res.ok ? res.json() : Promise.reject(res.statusText)))
+.catch(console.log);
+}
+
+addLike(cardId){
+  return fetch(`${this._baseUrl}/cards/likes/${cardId}`, { 
+    method: "PUT",
+    headers: this._headers
+}).then((res) => (res.ok ? res.json() : Promise.reject(res.statusText)))
+.catch(console.log);
+}
+
   getUserInfo() {
     return fetch(`${this._baseUrl}/users/me`, { headers: this._headers })
       .then((res) => (res.ok ? res.json() : Promise.reject(res.statusText)))

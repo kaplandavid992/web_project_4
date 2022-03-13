@@ -10,7 +10,7 @@
  const inputRole = document.querySelector("#inputRole");
  const userName = document.querySelector(nameSelector);
  const userRole = document.querySelector(roleSelector);
- 
+ const likesNumItem = document.querySelector(".elements__likesNumber");
  
  const settings = {
   inputSelector: ".popup__form-input",
@@ -21,7 +21,7 @@
   formSelector: ".popup__form"
 };
 
- export { roleSelector, nameSelector, inputName, inputRole,  
+ export { roleSelector, nameSelector, inputName, inputRole, likesNumItem, 
      settings, gallerySelector, userName, userRole, 
       profileAddBtn, profileEditBtn, cardsElementsList, imagePopupSelector}
 
