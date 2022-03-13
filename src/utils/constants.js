@@ -11,6 +11,7 @@
  const userName = document.querySelector(nameSelector);
  const userRole = document.querySelector(roleSelector);
  
+ 
  const settings = {
   inputSelector: ".popup__form-input",
   submitButtonSelector: ".popup__form-submit-btn",
@@ -21,7 +22,7 @@
 };
 
  export { roleSelector, nameSelector, inputName, inputRole,  
-     settings, gallerySelector, userName, userRole,
+     settings, gallerySelector, userName, userRole, 
       profileAddBtn, profileEditBtn, cardsElementsList, imagePopupSelector}
 
 

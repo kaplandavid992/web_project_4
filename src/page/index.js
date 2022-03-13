@@ -2,6 +2,8 @@ import "./index.css";
 import FormValidator from "../components/FormValidator.js";
 import UserInfo from "../components/UserInfo.js";
 import PopupWithForm from "../components/PopupWithForm.js";
+import PopupWithSubmit from "../components/PopupWithSubmit.js";
+
 import {
   settings,
   nameSelector,
@@ -19,6 +21,7 @@ import PopupWithImage from "../components/PopupWithImage.js";
 import Section from "../components/Section.js";
 import { api } from "../components/Api.js";
 
+
 const gallery = new Section(
   {
     data: [],
@@ -31,6 +34,7 @@ const gallery = new Section(
 
 const addPopup = new PopupWithForm("#addImage", handleCardFormSubmit);
 const editPopup = new PopupWithForm("#editProfile", handleProfileFormSubmit);
+const confirmDeletePopUp = new PopupWithSubmit("#confirmDelete");
 const imagePopup = new PopupWithImage(imagePopupSelector);
 const profileUserInfo = new UserInfo({ nameSelector, roleSelector });
 
@@ -48,10 +52,15 @@ const enableValidation = (settings) => {
 enableValidation(settings);
 editPopup.setEventListeners();
 addPopup.setEventListeners();
+confirmDeletePopUp.setEventListeners();
+
 
 const cardRenderer = (item) => {
+  const ownerId = item.ownerId ? item.ownerId : item.owner._id;
   const text = item.name;
   const image = item.link;
+  const likesNum = item.likes ? item.likes.length : "0" ;
+  const id = item._id;
   const handleCardClick = (imagePopup) => {
     imagePopup.open(image, text);
   };
@@ -59,29 +68,41 @@ const cardRenderer = (item) => {
   imagePopup.setEventListeners();
   const card = new Card(
     {
+      ownerId,
       text,
       image,
+      id,
+      likesNum,
       handleCardClick: () => {
         handleCardClick(imagePopup);
       },
+      openDeleteConfirmPopUp: (id) => {
+        confirmDeletePopUp.open();
+        confirmDeletePopUp.deleteAction(()=>{
+          api.confirmDelete(id).then(res =>{
+            card.deleteDomCard();
+          });
+        })
+      },
     },
-    "#card-template"
+    "#card-template", userId
   );
   const cardElement = card.generateCard();
+  
   return cardElement;
 };
 
-api.getUserInfo().then((res) => {
-  userName.textContent = res.name;
-  userRole.textContent = res.about;
-});
-
-api.getInitialCards().then((res) => {
-  const cards = Array.from(res);
+let userId;
+Promise.all([api.getUserInfo(), api.getInitialCards()]).
+then(([resUser, resCards])=>{
+  userId = resUser._id;
+  const cards = Array.from(resCards);
   cards.forEach((card) => {
     gallery.addItem(cardRenderer(card));
   });
-});
+  userName.textContent = resUser.name;
+  userRole.textContent = resUser.about;
+}); 
 
 function handleProfileFormSubmit() {
   const inputFields = editPopup.getInputValues();
@@ -96,7 +117,11 @@ function handleCardFormSubmit() {
   const item = {};
   item.name = text;
   item.link = image;
-  gallery.addItem(cardRenderer(item));
+  api.postNewCard(text,image).then( res => {
+    item.ownerId = res.owner._id;
+    item._id = res._id;
+    gallery.addItem(cardRenderer(item));
+  });
 }
 
 profileEditBtn.addEventListener("click", () => {

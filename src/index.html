@@ -16,7 +16,12 @@
             alt="exit icon button"
           />
         </button>
-        <form class="popup__form" name="edit__form" id="editProfileForm" novalidate>
+        <form
+          class="popup__form"
+          name="edit__form"
+          id="editProfileForm"
+          novalidate
+        >
           <h2 class="popup__form-header">Edit profile</h2>
           <div class="popup__form-control">
             <input
@@ -63,7 +68,12 @@
           />
         </button>
 
-        <form class="popup__form" name="add__form" id="createNewPlaceForm" novalidate>
+        <form
+          class="popup__form"
+          name="add__form"
+          id="createNewPlaceForm"
+          novalidate
+        >
           <h2 class="popup__form-header">Create place</h2>
           <div class="popup__form-control">
             <input
@@ -89,8 +99,12 @@
             />
             <p class="popup__form-errorMsg" id="inputLink-error"></p>
           </div>
-          <button class="popup__form-submit-btn popup__form-submit-btn_inactive"
-                type="submit" aria-label="" disabled>
+          <button
+            class="popup__form-submit-btn popup__form-submit-btn_inactive"
+            type="submit"
+            aria-label=""
+            disabled
+          >
             Create
           </button>
         </form>
@@ -111,9 +125,32 @@
       </div>
     </div>
 
+    <div class="popup" id="confirmDelete">
+      <div class="popup__window">
+        <button class="popup__exit-btn" type="reset" aria-label="">
+          <img
+            class="popup__exit-icon"
+            src="<%=require('./images/exit_icon.png')%>"
+            alt="exit icon button"
+          />
+        </button>
+        <form
+          class="popup__form"
+          name="confirmDelete__form"
+          id="confirmDeleteForm"
+          novalidate
+        >
+          <h2 class="popup__form-header">Are you sure?</h2>  
+          <button class="popup__form-submit-btn" type="submit" aria-label="">
+            Yes
+          </button>
+        </form>
+      </div>
+    </div>
+
     <header class="header">
       <img
-      src="<%=require('./images/logoaroundus.svg')%>"
+        src="<%=require('./images/logoaroundus.svg')%>"
         alt="around the us logo"
         class="header__title-logo"
       />
@@ -159,11 +196,14 @@
         <button class="button elements__delete-icon"></button>
         <div class="elements__rectangle">
           <h2 class="elements__text"></h2>
-          <button
-            class="button elements__like-btn"
-            type="button"
-            aria-label=""
-          ></button>
+          <div class="elements__likesContainer">
+            <button
+              class="button elements__like-btn"
+              type="button"
+              aria-label=""
+            ></button>
+            <p class="elements__likesNumber"></p>
+          </div>
         </div>
       </li>
     </template>

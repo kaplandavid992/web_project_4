@@ -10,6 +10,27 @@ export default class Api {
       .catch(console.log);
   }
 
+  postNewCard(name,link) {
+    return fetch(`${this._baseUrl}/cards`, { 
+      method: "POST",
+      headers: this._headers,
+      body: JSON.stringify({
+        name,
+        link,
+      }),
+    })
+      .then((res) => (res.ok ? res.json() : Promise.reject(res.statusText)))
+      .catch(console.log);
+  }
+
+  confirmDelete(cardId){
+    return fetch(`${this._baseUrl}/cards/${cardId}`, { 
+      method: "DELETE",
+      headers: this._headers
+  }).then((res) => (res.ok ? res.json() : Promise.reject(res.statusText)))
+  .catch(console.log);
+}
+
   getUserInfo() {
     return fetch(`${this._baseUrl}/users/me`, { headers: this._headers })
       .then((res) => (res.ok ? res.json() : Promise.reject(res.statusText)))
