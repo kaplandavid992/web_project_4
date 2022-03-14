@@ -5,12 +5,13 @@ import PopupWithForm from "../components/PopupWithForm.js";
 import PopupWithSubmit from "../components/PopupWithSubmit.js";
 
 import {
-  // likesNumItem,
   settings,
+  editProfileImage,
   nameSelector,
   roleSelector,
   profileAddBtn,
   profileEditBtn,
+  profileImage,
   imagePopupSelector,
   gallerySelector,
   userName,
@@ -33,6 +34,7 @@ const gallery = new Section(
 );
 
 const addPopup = new PopupWithForm("#addImage", handleCardFormSubmit);
+const editProfileImgPopup = new PopupWithForm("#editProfileImage", handleEditProfileImage);
 const editPopup = new PopupWithForm("#editProfile", handleProfileFormSubmit);
 const confirmDeletePopUp = new PopupWithSubmit("#confirmDelete");
 const imagePopup = new PopupWithImage(imagePopupSelector);
@@ -52,6 +54,7 @@ const enableValidation = (settings) => {
 enableValidation(settings);
 editPopup.setEventListeners();
 addPopup.setEventListeners();
+editProfileImgPopup.setEventListeners();
 confirmDeletePopUp.setEventListeners();
 
 const cardRenderer = (item) => {
@@ -140,6 +143,13 @@ function handleCardFormSubmit() {
   });
 }
 
+function handleEditProfileImage(){
+  const inputLinkField = editProfileImgPopup.getInputValues();
+  const link = inputLinkField.form__imageLink;
+  api.editAvatarImage(link);
+  profileImage.src = link;
+}
+
 profileEditBtn.addEventListener("click", () => {
   const currentUserProfile = profileUserInfo.getUserInfo();
   inputName.setAttribute("value", currentUserProfile.name);
@@ -152,3 +162,8 @@ profileAddBtn.addEventListener("click", () => {
   formValidators["add__form"].resetValidation();
   addPopup.open();
 });
+
+editProfileImage.addEventListener("click", () => {
+  formValidators["editProfileImage__form"].resetValidation();
+  editProfileImgPopup.open();
+})

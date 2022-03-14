@@ -111,6 +111,41 @@
       </div>
     </div>
 
+    <div class="popup" id="editProfileImage">
+      <div class="popup__window">
+        <button class="popup__exit-btn" type="reset" aria-label="">
+          <img
+            class="popup__exit-icon"
+            src="<%=require('./images/exit_icon.png')%>"
+            alt="exit icon button"
+          />
+        </button>
+        <form
+          class="popup__form"
+          name="editProfileImage__form"
+          id="editProfileImageForm"
+          novalidate
+        >
+          <h2 class="popup__form-header">Change profile picture</h2>
+          <div class="popup__form-control">
+            <input
+              id="inputRole"
+              type="url"
+              class="popup__form-input"
+              placeholder="Insert new image link"
+              name="form__imageLink"
+              value=""
+              required
+            />
+            <p class="popup__form-errorMsg" id="inputRole-error"></p>
+          </div>
+          <button class="popup__form-submit-btn" type="submit" aria-label="">
+            Save
+          </button>
+        </form>
+      </div>
+    </div>
+
     <div class="popup" id="imagePopUp">
       <div class="popup__window popup__window_imagePopUp">
         <button class="popup__exit-btn" type="reset" aria-label="">
@@ -158,11 +193,19 @@
 
     <main>
       <section class="profile">
+        <div class="profile__imageContainer">
         <img
           class="profile__image"
           src="<%=require('./images/profileone.jpg')%>"
           alt="face of person matching profile"
         />
+
+        <img
+        class="profile__editImage"
+        src="<%=require('./images/editImagePen.png')%>"
+        alt="edit image pen icon"
+        />
+      </div>
 
         <div class="profile__text-container">
           <div class="profile__name-edit-container">
