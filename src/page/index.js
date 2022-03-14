@@ -16,6 +16,8 @@ import {
   gallerySelector,
   userName,
   userRole,
+  inputName,
+  inputRole,
 } from "../utils/constants.js";
 
 import Card from "../components/Card.js";
@@ -34,7 +36,10 @@ const gallery = new Section(
 );
 
 const addPopup = new PopupWithForm("#addImage", handleCardFormSubmit);
-const editProfileImgPopup = new PopupWithForm("#editProfileImage", handleEditProfileImage);
+const editProfileImgPopup = new PopupWithForm(
+  "#editProfileImage",
+  handleEditProfileImage
+);
 const editPopup = new PopupWithForm("#editProfile", handleProfileFormSubmit);
 const confirmDeletePopUp = new PopupWithSubmit("#confirmDelete");
 const imagePopup = new PopupWithImage(imagePopupSelector);
@@ -63,7 +68,7 @@ const cardRenderer = (item) => {
   const image = item.link;
   let likesNum = item.likes.length;
   const id = item._id;
-  
+
   const handleCardClick = (imagePopup) => {
     imagePopup.open(image, text);
   };
@@ -89,10 +94,9 @@ const cardRenderer = (item) => {
       },
       handleLikeNumber: (id, updateAction) => {
         if (updateAction === "addLike") {
-          api.addLike(id).then(
-          likesNum += 1);
+          api.addLike(id).then((likesNum += 1));
         } else {
-          api.deleteLike(id).then(res => res);
+          api.deleteLike(id).then((res) => res);
           if (likesNum > 0) {
             likesNum -= 1;
           }
@@ -143,7 +147,7 @@ function handleCardFormSubmit() {
   });
 }
 
-function handleEditProfileImage(){
+function handleEditProfileImage() {
   const inputLinkField = editProfileImgPopup.getInputValues();
   const link = inputLinkField.form__imageLink;
   api.editAvatarImage(link);
@@ -151,9 +155,11 @@ function handleEditProfileImage(){
 }
 
 profileEditBtn.addEventListener("click", () => {
-  const currentUserProfile = profileUserInfo.getUserInfo();
-  inputName.setAttribute("value", currentUserProfile.name);
-  inputRole.setAttribute("value", currentUserProfile.role);
+  const currentUserProfile = {};
+  api.getUserInfo().then((res) => {
+    inputName.setAttribute("value", res.name);
+    inputRole.setAttribute("value", res.about);
+  });
   formValidators["edit__form"].resetValidation();
   editPopup.open();
 });
@@ -166,4 +172,4 @@ profileAddBtn.addEventListener("click", () => {
 editProfileImage.addEventListener("click", () => {
   formValidators["editProfileImage__form"].resetValidation();
   editProfileImgPopup.open();
-})
+});
