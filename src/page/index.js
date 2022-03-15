@@ -85,7 +85,7 @@ const createCard = (item) => {
   const handleCardClick = (imagePopup) => {
     imagePopup.open(image, text);
   };
-
+  console.log(item);
   const card = new Card(
     {
       likedBolVal,
@@ -132,7 +132,6 @@ Promise.all([api.getUserInfo(), api.getInitialCards()])
     cards.forEach((card) => {
       gallery.addItem(createCard(card));
     });
-    console.log(resUser);
     profileUserInfo.setUserInfo(resUser);
   })
   .catch(console.log);
