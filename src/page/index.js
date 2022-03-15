@@ -221,10 +221,10 @@ function handleDeleteLike(card) {
 }
 
 profileEditBtn.addEventListener("click", () => {
+  formValidators["edit__form"].resetValidation();
   const userData = profileUserInfo.getUserInfo();
   inputName.setAttribute("value", userData.name);
   inputRole.setAttribute("value", userData.role);
-  formValidators["edit__form"].resetValidation();
   editPopup.open();
 });
 
