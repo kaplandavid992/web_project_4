@@ -9,6 +9,7 @@ import {
   editProfileImage,
   nameSelector,
   roleSelector,
+  avatarSelector,
   profileAddBtn,
   profileEditBtn,
   profileImage,
@@ -43,7 +44,11 @@ const editProfileImgPopup = new PopupWithForm(
 const editPopup = new PopupWithForm("#editProfile", handleProfileFormSubmit);
 const confirmDeletePopUp = new PopupWithSubmit("#confirmDelete");
 const imagePopup = new PopupWithImage(imagePopupSelector);
-const profileUserInfo = new UserInfo({ nameSelector, roleSelector });
+const profileUserInfo = new UserInfo({
+  nameSelector,
+  roleSelector,
+  avatarSelector,
+});
 
 const formValidators = {};
 const enableValidation = (settings) => {
@@ -61,6 +66,7 @@ editPopup.setEventListeners();
 addPopup.setEventListeners();
 editProfileImgPopup.setEventListeners();
 confirmDeletePopUp.setEventListeners();
+imagePopup.setEventListeners();
 
 const cardRenderer = (item) => {
   const ownerId = item.ownerId ? item.ownerId : item.owner._id;
@@ -69,9 +75,9 @@ const cardRenderer = (item) => {
   let likesNum = item.likes.length;
   const id = item._id;
   let likedBolVal = false;
-  item.likes.forEach((user) => { 
-    if(user._id === userId){
-      likedBolVal = true; 
+  item.likes.forEach((user) => {
+    if (user._id === userId) {
+      likedBolVal = true;
       return likedBolVal;
     }
   });
@@ -80,7 +86,6 @@ const cardRenderer = (item) => {
     imagePopup.open(image, text);
   };
 
-  imagePopup.setEventListeners();
   const card = new Card(
     {
       likedBolVal,
@@ -95,14 +100,21 @@ const cardRenderer = (item) => {
       openDeleteConfirmPopUp: (id) => {
         confirmDeletePopUp.open();
         confirmDeletePopUp.deleteAction(() => {
-          api.confirmDelete(id).then((res) => {
-            card.deleteDomCard();
-            confirmDeletePopUp.close();
-          }).catch(console.log);
+          api
+            .confirmDelete(id)
+            .then((res) => {
+              card.deleteDomCard();
+              confirmDeletePopUp.close();
+            })
+            .catch(console.log);
         });
       },
-      handleLike: (card)=>{handleLike(card)},
-      handleDeleteLike:(card)=>{handleDeleteLike(card)},
+      handleLike: (card) => {
+        handleLike(card);
+      },
+      handleDeleteLike: (card) => {
+        handleDeleteLike(card);
+      },
     },
 
     "#card-template",
@@ -113,28 +125,32 @@ const cardRenderer = (item) => {
 };
 
 let userId;
-Promise.all([api.getUserInfo(), api.getInitialCards()]).then(
-  ([resUser, resCards]) => {
+Promise.all([api.getUserInfo(), api.getInitialCards()])
+  .then(([resUser, resCards]) => {
     userId = resUser._id;
     const cards = Array.from(resCards);
     cards.forEach((card) => {
       gallery.addItem(cardRenderer(card));
     });
-    userName.textContent = resUser.name;
-    userRole.textContent = resUser.about;
-  }
-).catch(console.log);
+    console.log(resUser);
+    profileUserInfo.setUserInfo(resUser);
+  })
+  .catch(console.log);
 
 function handleProfileFormSubmit() {
   const inputFields = editPopup.getInputValues();
-  profileUserInfo.setUserInfo(inputFields);
-  api.editUserInfo(inputFields).then(()=>{
-    editPopup.close();
-  }).catch(console.log).finally(()=>{
-    const submitBtn = editPopup.getBtn();
-    submitBtn.textContent = "Save";
-    submitBtn.setAttribute("style", "cursor:pointer");
-  });
+  api
+    .editUserInfo(inputFields)
+    .then((res) => {
+      editPopup.close();
+      profileUserInfo.setUserInfo(res);
+    })
+    .catch(console.log)
+    .finally(() => {
+      const submitBtn = editPopup.getBtn();
+      submitBtn.textContent = "Save";
+      submitBtn.setAttribute("style", "cursor:pointer");
+    });
 }
 
 function handleCardFormSubmit() {
@@ -144,63 +160,70 @@ function handleCardFormSubmit() {
   const item = {};
   item.name = text;
   item.link = image;
-  api.postNewCard(text, image).then((res) => {
-    item.ownerId = res.owner._id;
-    item._id = res._id;
-    item.likes = res.likes;
-    gallery.addItem(cardRenderer(item));
-    addPopup.close();
-  }).catch(console.log).finally(()=>{
-    const submitBtn = addPopup.getBtn();
-    submitBtn.textContent = "Create";
-    submitBtn.setAttribute("style", "cursor:pointer");
-  });
+  api
+    .postNewCard(text, image)
+    .then((res) => {
+      item.ownerId = res.owner._id;
+      item._id = res._id;
+      item.likes = res.likes;
+      gallery.addItem(cardRenderer(item));
+      addPopup.close();
+    })
+    .catch(console.log)
+    .finally(() => {
+      const submitBtn = addPopup.getBtn();
+      submitBtn.textContent = "Create";
+      submitBtn.setAttribute("style", "cursor:pointer");
+    });
 }
 
 function handleEditProfileImage() {
   const inputLinkField = editProfileImgPopup.getInputValues();
   const link = inputLinkField.form__imageLink;
-  api.editAvatarImage(link).then(()=>{
-    editProfileImgPopup.close();
-  }).catch((err) => {
-    console.log(err);
-}).finally(()=>{
-  const submitBtn = editProfileImgPopup.getBtn();
-  submitBtn.textContent = "Save";
-  submitBtn.setAttribute("style", "cursor:pointer");
-});
+  api
+    .editAvatarImage(link)
+    .then((res) => {
+      editProfileImgPopup.close();
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+    .finally(() => {
+      const submitBtn = editProfileImgPopup.getBtn();
+      submitBtn.textContent = "Save";
+      submitBtn.setAttribute("style", "cursor:pointer");
+    });
   profileImage.src = link;
 }
 
 function handleLike(card) {
-  api.likeCard(card.getId())
-      .then((res) => {
-          card.updateLikes(res.likes.length);
-          card.toggleLikeButton();
-      })
-      .catch((err) => {
-          console.log(err);
-      });
+  api
+    .likeCard(card.getId())
+    .then((res) => {
+      card.updateLikes(res.likes.length);
+      card.toggleLikeButton();
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 }
 
 function handleDeleteLike(card) {
-  api.deleteLike(card.getId())
-      .then((res) => {
-          card.updateLikes(res.likes.length);
-          card.toggleLikeButton();
-      })
-      .catch((err) => {
-          console.log(err);
-      });
+  api
+    .deleteLike(card.getId())
+    .then((res) => {
+      card.updateLikes(res.likes.length);
+      card.toggleLikeButton();
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 }
 
-
 profileEditBtn.addEventListener("click", () => {
-  const currentUserProfile = {};
-  api.getUserInfo().then((res) => {
-    inputName.setAttribute("value", res.name);
-    inputRole.setAttribute("value", res.about);
-  }).catch(console.log);
+  const userData = profileUserInfo.getUserInfo();
+  inputName.setAttribute("value", userData.name);
+  inputRole.setAttribute("value", userData.role);
   formValidators["edit__form"].resetValidation();
   editPopup.open();
 });

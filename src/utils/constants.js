@@ -2,6 +2,7 @@ const imagePopupSelector = "#imagePopUp";
 const gallerySelector = ".elements__list";
 const nameSelector = ".profile__name";
 const roleSelector = ".profile__role";
+const avatarSelector = ".profile__image";
 const cardsElementsList = document.querySelector(gallerySelector);
 const profileEditBtn = document.querySelector(".profile__edit-btn");
 const profileAddBtn = document.querySelector(".profile__add-btn");
@@ -25,6 +26,7 @@ const settings = {
 export {
   roleSelector,
   nameSelector,
+  avatarSelector,
   inputName,
   inputRole,
   likesNumItem,
