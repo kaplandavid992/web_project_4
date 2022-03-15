@@ -48,9 +48,11 @@ export default class FormValidator {
     if (this._hasInvalidInput(this._inputList)) {
       this._buttonElement.classList.add(this._inactiveButtonClass);
       this._buttonElement.setAttribute("disabled", true);
+      this._buttonElement.setAttribute("style", "cursor:not-allowed");
     } else {
       this._buttonElement.classList.remove(this._inactiveButtonClass);
       this._buttonElement.removeAttribute("disabled");
+      this._buttonElement.setAttribute("style", "cursor: pointer");
     }
   };
 

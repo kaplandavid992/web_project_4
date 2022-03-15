@@ -6,12 +6,11 @@ export default class Api {
 
   getInitialCards() {
     return fetch(`${this._baseUrl}/cards`, { headers: this._headers })
-      .then((res) => (res.ok ? res.json() : Promise.reject(res.statusText)))
-      .catch(console.log);
+      .then(this._checkResponse)
   }
 
-  postNewCard(name,link) {
-    return fetch(`${this._baseUrl}/cards`, { 
+  postNewCard(name, link) {
+    return fetch(`${this._baseUrl}/cards`, {
       method: "POST",
       headers: this._headers,
       body: JSON.stringify({
@@ -19,59 +18,66 @@ export default class Api {
         link,
       }),
     })
-      .then((res) => (res.ok ? res.json() : Promise.reject(res.statusText)))
-      .catch(console.log);
+      .then(this._checkResponse)
   }
 
-  confirmDelete(cardId){
-    return fetch(`${this._baseUrl}/cards/${cardId}`, { 
+  confirmDelete(cardId) {
+    return fetch(`${this._baseUrl}/cards/${cardId}`, {
       method: "DELETE",
-      headers: this._headers
-  }).then((res) => (res.ok ? res.json() : Promise.reject(res.statusText)))
-  .catch(console.log);
-}
+      headers: this._headers,
+    })
+      .then(this._checkResponse)
+  }
 
-deleteLike(cardId){
-  return fetch(`${this._baseUrl}/cards/likes/${cardId}`, { 
-    method: "DELETE",
-    headers: this._headers
-}).then((res) => (res.ok ? res.json() : Promise.reject(res.statusText)))
-.catch(console.log);
-}
+  deleteLike(cardId) {
+    return fetch(`${this._baseUrl}/cards/likes/${cardId}`, {
+      method: "DELETE",
+      headers: this._headers,
+    })
+      .then(this._checkResponse)
+  }
 
-addLike(cardId){
-  return fetch(`${this._baseUrl}/cards/likes/${cardId}`, { 
-    method: "PUT",
-    headers: this._headers
-}).then((res) => (res.ok ? res.json() : Promise.reject(res.statusText)))
-.catch(console.log);
-}
+  likeCard(cardId) {
+    return fetch(`${this._baseUrl}/cards/likes/${cardId}`, {
+      method: "PUT",
+      headers: this._headers,
+    })
+      .then(this._checkResponse)
+  }
 
   getUserInfo() {
     return fetch(`${this._baseUrl}/users/me`, { headers: this._headers })
-      .then((res) => (res.ok ? res.json() : Promise.reject(res.statusText)))
-      .catch(console.log);
+      .then(this._checkResponse)
   }
 
-  editUserInfo({form__name, form__role}) {
-    fetch(`${this._baseUrl}/users/me`, {
+  editUserInfo({ form__name, form__role }) {
+    return fetch(`${this._baseUrl}/users/me`, {
       method: "PATCH",
       headers: this._headers,
       body: JSON.stringify({
         name: form__name,
         about: form__role,
       }),
-    });
+    })
+      .then(this._checkResponse)
   }
 
   editAvatarImage(imageLink) {
-    fetch(`${this._baseUrl}/users/me/avatar`, {
+    return fetch(`${this._baseUrl}/users/me/avatar`, {
       method: "PATCH",
       headers: this._headers,
       body: JSON.stringify({
-        avatar: imageLink
+        avatar: imageLink,
       }),
-    });
+    })
+      .then(this._checkResponse)
+  }
+
+  _checkResponse(res) {
+    if (res.ok) {
+      return res.json();
+    }
+    return Promise.reject(`Error ${res.status}`);
   }
 }
 

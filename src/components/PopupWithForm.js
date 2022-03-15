@@ -25,15 +25,19 @@ export default class PopupWithForm extends Popup {
     super.setEventListeners();
     this._formPopupElement.addEventListener("submit", (e) => {
       e.preventDefault();
-      const prevText = this._submitBtn.textContent;
+      this._renderLoading();
+      this._submitHandler();
+    });
+  }
+
+  _renderLoading(){
       this._submitBtn.diabled = true;
       this._submitBtn.textContent = "Saving...";
-      setTimeout(() => {
-        this._submitHandler();
-        this.close();
-        this._submitBtn.textContent = prevText;
-      }, 1300);
-    });
+      this._submitBtn.setAttribute("style", "cursor:not-allowed");
+  }
+
+  getBtn(){
+    return this._submitBtn;
   }
 
   close() {
