@@ -68,7 +68,7 @@ editProfileImgPopup.setEventListeners();
 confirmDeletePopUp.setEventListeners();
 imagePopup.setEventListeners();
 
-const cardRenderer = (item) => {
+const createCard = (item) => {
   const ownerId = item.ownerId ? item.ownerId : item.owner._id;
   const text = item.name;
   const image = item.link;
@@ -130,7 +130,7 @@ Promise.all([api.getUserInfo(), api.getInitialCards()])
     userId = resUser._id;
     const cards = Array.from(resCards);
     cards.forEach((card) => {
-      gallery.addItem(cardRenderer(card));
+      gallery.addItem(createCard(card));
     });
     console.log(resUser);
     profileUserInfo.setUserInfo(resUser);
@@ -166,7 +166,7 @@ function handleCardFormSubmit() {
       item.ownerId = res.owner._id;
       item._id = res._id;
       item.likes = res.likes;
-      gallery.addItem(cardRenderer(item));
+      gallery.addItem(createCard(item));
       addPopup.close();
     })
     .catch(console.log)
@@ -184,6 +184,7 @@ function handleEditProfileImage() {
     .editAvatarImage(link)
     .then((res) => {
       editProfileImgPopup.close();
+      profileUserInfo.setUserInfo(res);
     })
     .catch((err) => {
       console.log(err);
@@ -193,7 +194,6 @@ function handleEditProfileImage() {
       submitBtn.textContent = "Save";
       submitBtn.setAttribute("style", "cursor:pointer");
     });
-  profileImage.src = link;
 }
 
 function handleLike(card) {
