@@ -85,7 +85,7 @@ const createCard = (item) => {
   const handleCardClick = (imagePopup) => {
     imagePopup.open(image, text);
   };
-  console.log(item);
+  
   const card = new Card(
     {
       likedBolVal,
@@ -146,9 +146,7 @@ function handleProfileFormSubmit() {
     })
     .catch(console.log)
     .finally(() => {
-      const submitBtn = editPopup.getBtn();
-      submitBtn.textContent = "Save";
-      submitBtn.setAttribute("style", "cursor:pointer");
+      editPopup.renderLoading(false);
     });
 }
 
@@ -170,9 +168,7 @@ function handleCardFormSubmit() {
     })
     .catch(console.log)
     .finally(() => {
-      const submitBtn = addPopup.getBtn();
-      submitBtn.textContent = "Create";
-      submitBtn.setAttribute("style", "cursor:pointer");
+      addPopup.renderLoading(false)
     });
 }
 
@@ -189,9 +185,7 @@ function handleEditProfileImage() {
       console.log(err);
     })
     .finally(() => {
-      const submitBtn = editProfileImgPopup.getBtn();
-      submitBtn.textContent = "Save";
-      submitBtn.setAttribute("style", "cursor:pointer");
+      editProfileImgPopup.renderLoading(false);
     });
 }
 

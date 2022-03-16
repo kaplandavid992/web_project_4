@@ -10,6 +10,7 @@ export default class PopupWithForm extends Popup {
     this._inputList =
       this._formPopupElement.querySelectorAll(".popup__form-input");
     this._submitHandler = submitHandler;
+    this._initialText = this._submitBtn.textContent;
   }
 
   getInputValues() {
@@ -25,15 +26,22 @@ export default class PopupWithForm extends Popup {
     super.setEventListeners();
     this._formPopupElement.addEventListener("submit", (e) => {
       e.preventDefault();
-      this._renderLoading();
+      this.renderLoading(true);
       this._submitHandler();
     });
   }
 
-  _renderLoading(){
+  
+  renderLoading(isLoading, loadingText='Saving...') {
+    if (isLoading) {
       this._submitBtn.diabled = true;
-      this._submitBtn.textContent = "Saving...";
+      this._submitBtn.textContent = loadingText;
       this._submitBtn.setAttribute("style", "cursor:not-allowed");
+    } else {
+      this._submitBtn.diabled = false;
+      this._submitBtn.textContent = this._initialText;
+      this._submitBtn.setAttribute("style", "cursor:pointer");
+    }
   }
 
   getBtn(){
