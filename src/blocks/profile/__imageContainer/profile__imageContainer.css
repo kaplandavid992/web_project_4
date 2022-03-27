@@ -14,3 +14,9 @@ cursor: pointer;
 .profile__imageContainer:hover .profile__editImage {
     opacity: 1;
   }
+
+  @media screen and (max-width: 450px) {
+    .profile__imageContainer {
+      margin-right: 0;
+    }
+  }
