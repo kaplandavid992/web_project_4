@@ -25,7 +25,7 @@
 
 @media screen and (min-width: 451px) and (max-width: 583px) {
   .profile__editImage{
-    left : 44.5%;
+    left : 46.5%;
   }
 }
 
@@ -34,6 +34,6 @@
     margin: 0 auto 30px;
   }
   .profile__editImage{
-    left : 40%;
+    left : 45%;
   }
 }
